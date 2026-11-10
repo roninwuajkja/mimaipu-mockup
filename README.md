@@ -2,6 +2,8 @@
 
 Mockup web interactivo de un centro de despacho municipal y de un canal ciudadano tipo WhatsApp para Maipú. Funciona sin instalaciones ni backend.
 
+**Demo en línea:** [https://roninwuajkja.github.io/mimaipu-mockup/](https://roninwuajkja.github.io/mimaipu-mockup/)
+
 ## Abrir
 
 Abre `index.html` directamente en Chrome, Edge o Firefox. También puedes servirlo como archivo estático si tu navegador restringe recursos locales:
