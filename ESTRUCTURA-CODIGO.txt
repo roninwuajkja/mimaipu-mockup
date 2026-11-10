@@ -1,0 +1,1350 @@
+﻿================================================================================
+MIMAIPU - ESTRUCTURA COMPLETA DEL CODIGO
+Mockup web estatico: centro de despacho municipal + canal ciudadano
+Archivo de referencia generado el 10/11/2026
+================================================================================
+
+CONTENIDO
+---------
+  0. Resumen general
+  1. Arbol de archivos
+  2. index.html - estructura
+  3. styles.css - estructura
+  4. app.js - estructura
+  5. Imagenes y graficos: como se construyen
+  6. Modelo de datos
+  7. Flujos funcionales
+  8. Estados y clases CSS
+  9. Accesibilidad
+ 10. Datos reales vs simulados
+ 11. Notas y deuda tecnica
+ 12. Como editar el mockup
+
+
+================================================================================
+0. RESUMEN GENERAL
+================================================================================
+
+Tipo de proyecto:
+  Mockup web estatico. No tiene backend, base de datos, frameworks, bundler ni
+  dependencias externas. Se abre directamente con index.html.
+
+Tecnologias:
+  - HTML5 semantico
+  - CSS3 (custom properties, grid, flexbox, dialog, :has, :where)
+  - JavaScript ES6+ en un IIFE con "use strict"
+  - SVG inline para logo, iconos, mapa y evidencia fotografica
+  - Fuentes locales WOFF2
+
+Archivos principales:
+  index.html   722 lineas   estructura, textos, iconos y mapa
+  styles.css  5.195 lineas  sistema visual y responsive
+  app.js      2.081 lineas  datos demo y toda la interaccion
+
+Vistas:
+  1. Despacho municipal (#despacho)
+     - impacto del turno
+     - mapa operativo por macrozonas
+     - filtros por capa, riesgo y zona
+     - tickets priorizados y despacho agrupado
+     - flota sensorizada
+  2. Canal ciudadano (#ciudadano)
+     - chat simulado tipo WhatsApp
+     - reporte por voz, texto o foto
+     - confirmacion de ubicacion y folio
+     - autorizacion o reprogramacion de visita
+     - cierre con evidencia antes/despues, puntos y recompensas
+
+Sin imagenes raster:
+  En assets/ solo hay fuentes y un favicon SVG. No hay JPG, PNG ni WebP.
+  Todo lo visual se dibuja con SVG/CSS o se genera con JavaScript. La unica
+  imagen real posible es la foto que sube el usuario en el chat.
+
+
+================================================================================
+1. ARBOL DE ARCHIVOS
+================================================================================
+
+Mockup App/
+|
++-- index.html                  Estructura, textos, sprite SVG, mapa y dialogos
++-- styles.css                  Sistema visual, componentes, responsive
++-- app.js                      Datos, renderizado e interacciones
++-- README.md                   Documentacion general del mockup
++-- ESTRUCTURA-CODIGO.txt       Este archivo
+|
++-- assets/
+    |
+    +-- favicon.svg             Icono del sitio (SVG, 64x64)
+    +-- fonts/
+        +-- archivo-latin.woff2          Fuente display (titulares)
+        +-- public-sans-latin.woff2      Fuente de interfaz y chat
+        +-- OFL-Archivo.txt              Licencia SIL OFL
+        +-- LICENSE-PublicSans.md        Licencia SIL OFL
+
+
+================================================================================
+2. index.html - ESTRUCTURA
+================================================================================
+
+2.1 CABECERA DEL DOCUMENTO (lineas 1-14)
+----------------------------------------
+   1-6    <!doctype html>, html lang="es-CL", charset UTF-8, viewport
+   6      <title>MiMaipu - Ecosistema Nervioso Urbano</title>
+   7      meta description
+   8      meta theme-color (#0b2238)
+   9      favicon SVG
+  10-11   preload de las dos fuentes WOFF2
+  12      styles.css
+  13      app.js con defer
+  14      </head>
+
+2.2 CUERPO Y ENLACE DE SALTO (lineas 15-16)
+-------------------------------------------
+  15      <body>
+  16      enlace "Saltar al contenido principal" -> #contenido
+
+2.3 SPRITE DE ICONOS SVG (lineas 18-158)
+----------------------------------------
+Un solo <svg class="icon-sprite"> oculto con 33 <symbol>.
+Cada icono se usa luego como:
+    <svg class="icon"><use href="#i-nombre"></use></svg>
+
+Listado de simbolos y estado de uso:
+
+  ID               LINEA   USADO   DESCRIPCION
+  i-grid             20    si      Panel / despacho
+  i-chat             26    si      Canal ciudadano
+  i-pin              30    si      Ubicacion
+  i-clock            34    si      Tiempo / ETA
+  i-lamp             38    si      Alumbrado
+  i-road             43    si      Bacheo / calle
+  i-trash            47    si      Aseo
+  i-truck            51    si      Camion / flota
+  i-camera           58    si      Camara IA
+  i-vibration        62    si      Sensor de vibracion
+  i-wifi             65    NO      WiFi (definido sin uso)
+  i-cloud-off        69    si      Sin conexion
+  i-refresh          73    si      Actualizar
+  i-x                77    si      Cerrar
+  i-check            80    si      Confirmar / seleccionar
+  i-check-circle     83    si      Exito / asignado
+  i-mic              87    si      Nota de voz
+  i-photo            91    si      Foto
+  i-keyboard         96    si      Escribir
+  i-alert           100    si      Riesgo alto
+  i-eye             104    si      Riesgo moderado
+  i-shield          108    si      Riesgo preventivo / canal seguro
+  i-leaf            112    si      Beneficio ambiental
+  i-tree            116    si      CO2 / arboles
+  i-coins           119    si      Puntos
+  i-route           124    si      Despacho agrupado
+  i-verified        129    si      Canal verificado
+  i-undo            133    si      Reiniciar
+  i-arrow           137    si      Enviar / continuar
+  i-info            140    si      Informacion
+  i-receipt         144    NO      Recibo (definido sin uso)
+  i-building        148    NO      Edificio (definido sin uso)
+  i-users           152    NO      Usuarios (definido sin uso)
+
+Nota: 29 iconos se usan realmente; 4 quedaron definidos sin uso.
+
+2.4 HEADER GLOBAL (lineas 160-198)
+----------------------------------
+ 160-161   <header class="app-header">
+ 162-176   Marca MiMaipu: logo SVG inline + texto
+              - brand-mark: cuadrado azul con M y nodos
+              - brand-type: "MiMaipu" + "Ecosistema Nervioso Urbano"
+ 178-187   Navegacion principal:
+              - "Despacho municipal" -> #despacho (data-view-link="dashboard")
+              - "Canal ciudadano"   -> #ciudadano (data-view-link="citizen")
+ 189-196   Estado: etiqueta Demo, punto en vivo y reloj simulado #live-clock
+ 198       </header>
+
+2.5 CONTENIDO PRINCIPAL (lineas 200-564)
+----------------------------------------
+ 200       <main id="contenido" tabindex="-1">
+ 201       <section class="view" id="view-dashboard" data-view="dashboard">
+ 450       <section class="view" id="view-citizen" data-view="citizen" hidden>
+ 563       </section>
+ 564       </main>
+
+2.5.1 VISTA DESPACHO MUNICIPAL (lineas 201-448)
+-----------------------------------------------
+ 202-447   <div class="workspace">
+
+ 203-219   Cabecera de pagina:
+              - eyebrow "Centro de despacho - Maipu"
+              - h1 "Despacho urbano de Maipu."
+              - subtitulo
+              - estado de sincronizacion #sync-seconds
+              - boton #refresh-dashboard
+
+ 221-265   Panel de impacto del turno:
+              - titulo "Balance operacional"
+              - turno manana - 6 cuadrillas
+              - metricas:
+                  Diesel ahorrado: 18,4 L
+                  CO2 evitado: 48,2 kg (2,3 arboles/ano)
+                  Costo total: $1,84 M
+                    desglose operacion $1,39 M / mantencion $450 mil
+                  Respuesta promedio: 38 min
+              - nota "Indicadores simulados"
+
+ 267-431   Dashboard en grid:
+ 268-406     +-- Panel del mapa operativo
+ 269-274         Cabecera "Mapa operativo" y meta
+ 276-296         Toolbar:
+ 277-280           segmentos Semaforo / Incidentes (data-map-mode)
+ 281-295           filtros de capa Aseo / Bacheo / Alumbrado (data-layer)
+ 298-377         Escenario del mapa #map-stage (data-map-mode="status"):
+ 299-357           SVG .map-art viewBox="0 0 920 520":
+                      - clipPath #commune-clip (borde comunal)
+                      - filtro #map-soft-shadow
+                      - fondo
+                      - 6 poligonos .zone-fill (data-zone-shape)
+                      - 3 parques .map-parks
+                      - 1 linea de agua .map-water
+                      - 12 calles menores .map-minor-streets
+                      - 6 calles principales .map-major-streets
+                      - borde .map-boundary
+ 359-366           etiquetas HTML de calles .street-label:
+                      Av. Pajaritos, Av. 5 de Abril, Camino a Rinconada,
+                      Camino a Melipilla, Av. Alberto Llona, Av. Los Pinos
+ 368             capa de macrozonas #zones-layer (la llena app.js)
+ 369             capa de pines #pins-layer (la llena app.js)
+ 370             chip de filtro de zona #map-zone-filter
+ 371             popover de detalle #map-popover
+ 373-376         resumen inferior .map-summary
+ 379-401         Filtros de riesgo por macrozona:
+                   - botones data-risk="red|yellow|green"
+                   - boton #reset-risk
+ 402-405         Pie del mapa con nota y hora de corte #map-cut
+
+ 408-430     +-- Aside de tickets priorizados
+ 409-418         Cabecera, contador #ticket-count, boton #clear-zone
+ 419             lista #ticket-list (la llena app.js)
+ 420-429         barra de despacho agrupado #bulk-bar:
+                   - titulo #bulk-title y ayuda #bulk-help
+                   - boton #group-dispatch
+
+ 433-446   Panel de flota:
+              - cabecera "Flota sensorizada"
+              - resumen 3 en linea / 1 offline
+              - grid #fleet-grid (lo llena app.js)
+
+2.5.2 VISTA CANAL CIUDADANO (lineas 450-563)
+--------------------------------------------
+ 451-562   <div class="citizen-page">
+
+ 452-462   Intro:
+              - eyebrow "Canal ciudadano - WhatsApp MiMaipu"
+              - h1 "Reportar en Maipu, sin vueltas."
+              - estado "MIMA responde en menos de 1 min"
+
+ 464-561   Layout de dos columnas:
+
+ 465-499     +-- Aside informativo:
+ 466-470         historia "Habla. Nosotros coordinamos."
+ 472-480         promesa: canal ciudadano, no fiscalizador
+ 482-496         recorrido del reporte:
+                   01 Reporta
+                   02 Confirma
+                   03 Revisa el cierre
+                   botones data-stage="report|confirm|close"
+ 498             nota de prototipo
+
+ 501-560     +-- Columna del chat:
+ 502-506         pestanas moviles data-stage (Reporta / Confirma / Cierre)
+ 508-558         <section class="chat-shell">
+ 509-527           header del chat:
+                      avatar MIMA SVG
+                      nombre + verificacion
+                      "MIMA - asistente municipal"
+                      boton #reset-chat
+ 529-532           aviso: canal ciudadano, no fiscalizador
+ 534               log del chat #chat-log (role="log", aria-live)
+ 536-549           composer:
+                      #attach-button (foto)
+                      #chat-input (texto, maxlength 280)
+                      #composer-mic (voz)
+                      #composer-send (enviar)
+                      #photo-input (file oculto, accept="image/*")
+ 551-557           barra de grabacion #recording-bar:
+                      #cancel-recording
+                      indicador "Grabando nota de voz"
+                      waveform CSS (11 barras)
+                      #recording-time
+                      #send-recording
+ 559             nota al pie del chat
+
+2.6 FOOTER (lineas 566-575)
+---------------------------
+ 566-575   Marca, aviso de demostracion, version v0.9 y ubicacion.
+
+2.7 DIALOGOS NATIVOS Y TOAST (lineas 577-719)
+---------------------------------------------
+ 577-605   #dispatch-dialog   Despacho agrupado
+              - casos seleccionados #dispatch-selected
+              - resumen 1,8 km / 31 min / 2,4 L
+              - selector #crew-select (M-04, M-02, M-06)
+              - nota de CO2
+              - boton #confirm-dispatch
+
+ 607-622   #fleet-dialog      Detalle de flota
+              - titulo #fleet-dialog-title
+              - contenido #fleet-dialog-content
+              - boton #fleet-map-button "Ver en el mapa"
+
+ 624-657   #reschedule-dialog Reprogramar visita
+              - 3 ventanas con inputs name="visit-window"
+              - boton #confirm-reschedule
+
+ 659-692   #location-dialog   Corregir direccion
+              - 3 direcciones con inputs name="report-location"
+              - boton #confirm-location
+
+ 694-714   #rewards-dialog    Recompensas
+              - saldo #rewards-points
+              - lista #reward-list
+              - nota de canje simulado
+
+ 716-719   #toast             Aviso flotante role="status"
+
+
+================================================================================
+3. styles.css - ESTRUCTURA
+================================================================================
+
+3.1 BASE Y SISTEMA VISUAL
+-------------------------
+    1-15    @font-face Archivo y Public Sans (WOFF2 locales)
+   17-55    :root con tokens:
+              Tipografia: --font-display, --font-body
+              Tinta:      --ink, --ink-soft
+              Papel:      --paper, --paper-deep, --surface, --surface-muted
+              Lineas:     --line, --line-strong
+              Texto:      --muted, --muted-on-dark
+              Verde:      --green, --green-deep, --green-soft, --eco, --lime
+              Semaforo:   --red, --red-soft, --red-line
+                          --amber, --amber-soft, --amber-line
+                          --green-state, --green-state-soft, --green-state-line
+              Foco:       --focus
+              Sombras:    --shadow-panel (none), --shadow-float
+              Radios:     --radius-panel, --radius-card, --radius-control
+              Movimiento: --transition
+   57-115   Reset: box-sizing, html, body, selection, botones, enlaces, svg,
+            [hidden]
+  118-163   Tipografia base h1/h2/h3 y margenes
+  165-174   .icon: 20x20, trazo 1.8, currentColor
+  176-181   .icon-sprite oculto
+  183-193   .sr-only
+  195-221   .skip-link y foco visible
+
+3.2 BOTONES (lineas 226-346)
+----------------------------
+  226-252   .button base, hover, active, disabled
+  254-286   .button-primary y .button-secondary
+  288-303   .button-accent, .button-small
+  305-328   .text-button
+  330-346   .icon-button (44x44)
+
+3.3 HEADER (lineas 348-502)
+---------------------------
+  348-364   .app-header sticky y .header-inner
+  366-405   .brand, .brand-mark, .brand-type
+  407-448   .view-nav, .view-link, estado activo
+  450-502   .header-status, .demo-tag, .live-time, .live-dot, .live-label
+
+3.4 CABECERA DE PAGINA E IMPACTO (lineas 504-722)
+-------------------------------------------------
+  504-568   .workspace, .page-head, .kicker, .page-sub, .page-actions,
+            .sync-state, .sync-dot, spinner del boton actualizar
+  570-722   .impact-panel y metricas:
+              .impact-head, .impact-live
+              .impact-metrics (4 columnas)
+              .impact-metric, eco, costo
+              .tree-note, .cost-breakdown, nota de datos
+
+3.5 PANELES Y MAPA (lineas 725-1563)
+------------------------------------
+  725-771   .panel, .dashboard-grid (2 columnas), .panel-head, .map-panel
+  773-880   Toolbar del mapa:
+              .map-toolbar, .segmented, .segment
+              .layer-filters, .filter-label, .layer-chip, .chip-count
+  882-990   Escenario y arte SVG:
+              .map-stage (relative, overflow hidden)
+              .map-art (absolute, preserveAspectRatio none)
+              .zone-fill y las 6 variantes de color
+              .is-filtered / .is-selected
+              modo incidentes (baja opacidad de zonas)
+              .map-parks, .map-water, .map-minor-streets,
+              .map-major-streets, .map-boundary
+  992-1043  Etiquetas de calles .street-label y sus rotaciones
+ 1045-1147  Capas de zonas:
+              .zones-layer, .zone-label, hover, selected, muted
+              .zone-glyph + variantes rojo/amarillo/verde
+              .zone-copy
+ 1149-1256  Pines:
+              .pins-layer, .map-pin, .map-truck
+              circulos con ::before, iconos, halo .is-focused
+              indicador de conexion ::after y .is-offline
+              modo semaforo oculta pines
+              .is-layer-off, .is-risk-off
+ 1258-1291  Chip de filtro de zona .map-zone-filter
+ 1293-1337  Popover .map-popover
+ 1339-1366  Resumen .map-summary
+ 1368-1516  Filtros de riesgo:
+              .risk-filter-wrap, .risk-filter-head, #reset-risk
+              .risk-legend, .risk-filter, estados
+              .risk-icon + colores, .risk-copy, .risk-count
+              .map-foot
+ 1518-1563  Pills de estado .status-pill + variantes
+
+3.6 TICKETS Y DESPACHO (lineas 1565-1940)
+-----------------------------------------
+ 1565-1605  .tickets-panel, cabecera, .open-count, #clear-zone
+ 1607-1644  .ticket-list, .ticket-row y estados:
+              :last-child, :focus-within, .is-selected,
+              .is-assigned, .is-focused
+ 1646-1711  .ticket-rank, .ticket-meta, .ticket-risk + colores
+ 1713-1819  .ticket-title, .ticket-context, .ticket-location,
+            .ticket-time, .ticket-facts, .ticket-fact, .is-urgent
+ 1821-1899  .ticket-select, .select-mark, .ticket-assigned,
+            .ticket-empty
+ 1901-1940  .bulk-bar, .bulk-copy y boton de despacho
+
+3.7 FLOTA (lineas 1942-2174)
+----------------------------
+ 1942-1971  .fleet-panel, .fleet-head, .fleet-status, .fleet-updated
+ 1973-1985  .status-dot + verde/amarillo
+ 1987-2174  .fleet-grid (4 columnas), .fleet-item, .fleet-top,
+            .fleet-icon, .truck-mark, .fleet-name, .connectivity,
+            .sensor-row, .sensor, .fleet-bottom, .detail-cue,
+            estados .is-offline
+
+3.8 FOOTER (lineas 2176-2214)
+-----------------------------
+ 2176-2214  .app-footer, .footer-inner, .footer-brand, .footer-version
+
+3.9 CANAL CIUDADANO (lineas 2216-3459)
+--------------------------------------
+ 2216-2414  Pagina y aside:
+              .citizen-page, .citizen-intro, .citizen-live
+              .citizen-layout (2 columnas)
+              .citizen-aside, .aside-story, .citizen-promise
+              .stage-nav, .stage-step, .stage-index,
+              .prototype-note
+ 2416-2570  Chat:
+              .chat-column, .mobile-stages (oculto en escritorio)
+              .chat-shell, .chat-header, .chat-identity,
+              .mima-avatar, .chat-title, .verified-icon,
+              .chat-reset, .chat-fiscal-note,
+              .chat-log y scrollbar, .chat-day
+ 2572-2666  Mensajes:
+              .msg, .msg-user, .msg-avatar, .msg-body,
+              .bubble, .msg-time
+ 2668-2732  Tarjetas:
+              .chat-card, .voice-card, .voice-card-head,
+              .voice-icon
+ 2734-2793  Acciones del chat:
+              .chat-primary, .chat-secondary-actions,
+              .chat-text-action
+ 2795-2863  Audio simulado:
+              .audio-bubble, .audio-play, .audio-wave (11 barras),
+              .audio-duration, .audio-transcript
+ 2865-2893  Foto del reporte:
+              .chat-photo, .chat-photo-image, .chat-photo-caption
+ 2895-2912  Indicador "escribiendo": .typing-bubble
+ 2914-2981  Ubicacion y acciones: .location-card, .location-line,
+            .card-actions, .chat-secondary
+ 2983-3070  Tarjeta de folio: .ticket-chat, .ticket-chat-head,
+            .ticket-label, .ticket-folio, .chat-status + is-yellow,
+            .chat-ticket-body
+ 3071-3175  Avance y ETA: .ticket-progress, .progress-step,
+            .eta-box
+ 3177-3231  Aviso autorizado y continuar: .authorized-box,
+            .demo-continue
+ 3232-3260  Cierre: .closure-card, .closure-head, .closure-body
+ 3262-3333  Evidencia antes/despues:
+              .evidence-compare (2 columnas sobre fondo azul)
+              .evidence-frame, .evidence-tag, .evidence-time,
+              .evidence-caption
+ 3335-3382  Impacto del cierre: .closure-impact, .impact-mini
+ 3384-3451  Puntos: .points-block, .points-main, .points-icon
+ 3453-3459  Nota al pie del chat
+
+3.10 COMPOSER Y GRABACION (lineas 3461-3630)
+--------------------------------------------
+ 3461-3544  .chat-composer, .composer-icon, .composer-mic,
+            .composer-send, .chat-input
+            Regla: con texto se oculta el microfono; sin texto se oculta enviar
+ 3546-3630  .recording-bar, .recording-cancel, .recording-state,
+            .recording-dot, .waveform (11 barras animadas),
+            #recording-time, #send-recording
+
+3.11 DIALOGOS, RECOMPENSAS Y TOAST (lineas 3632-4123)
+-----------------------------------------------------
+ 3632-3650  .app-dialog, ::backdrop, animacion de apertura
+ 3652-3800  Estructura de dialogos:
+              .dialog-header, .dialog-lede, .dialog-selected,
+              .dispatch-ticket, .dispatch-route-index,
+              .dispatch-summary, .field-label, .select,
+              .dialog-note, .dialog-actions
+ 3802-3888  Opciones con radio: .option-list, .radio-card,
+            .radio-mark, estados :has y :focus-within
+ 3889-3967  Recompensas: .rewards-balance, .reward-list,
+            .reward-row, .reward-cost
+ 3969-4079  Detalle de flota: .fleet-dialog-body, .fleet-dialog-top,
+            .fleet-detail-grid, .fleet-detail, .offline-banner,
+            #fleet-connection-button
+ 4081-4089  .spinner
+ 4090-4123  .toast y .toast-icon
+
+3.12 ANIMACIONES (lineas 4125-4158)
+-----------------------------------
+ 4125-4128  @keyframes spin
+ 4129-4133  @keyframes message-in
+ 4134-4138  @keyframes typing
+ 4139-4143  @keyframes record-pulse
+ 4144-4148  @keyframes wave
+ 4149-4153  @keyframes dialog-in
+ 4154-4158  @keyframes toast-in
+
+3.13 RESPONSIVE (lineas 4159-5164)
+----------------------------------
+ 4159-4198  @media (max-width: 1280px)
+              - ajusta paddings, nav, impacto y dashboard
+ 4199-4264  @media (max-width: 1180px)
+              - dashboard a una columna
+              - mapa con aspect-ratio 920/485
+              - tickets en 2 columnas
+              - flota en 2 columnas
+              - canal ciudadano en 2 columnas mas angostas
+ 4265-4390  @media (max-width: 980px)
+              - header se envuelve; nav ocupa todo el ancho
+              - impacto en 2 columnas
+              - se oculta el aside ciudadano
+              - aparecen las pestanas moviles
+              - chat con altura adaptable
+ 4391-4786  @media (max-width: 760px)
+              - cabeceras apiladas
+              - toolbar del mapa en columna
+              - mapa min-height 380px
+              - popover del mapa como hoja inferior
+              - se oculta la mayoria de etiquetas de calles
+              - filtros de riesgo en una columna
+              - tickets y flota en una columna
+              - chat a pantalla completa
+ 4787-5153  @media (max-width: 460px)
+              - tipografias y paddings reducidos
+              - mapa min-height 370px
+              - etiquetas de zona mas compactas
+              - ajustes de tickets, flota y chat
+ 5154-5164  @media (max-width: 370px)
+              - nav sin iconos y texto mas pequeno
+ 5165-5193  @media (prefers-reduced-motion: reduce)
+              - desactiva animaciones, transiciones y scroll suave
+              - elimina transformaciones de hover
+
+
+================================================================================
+4. app.js - ESTRUCTURA
+================================================================================
+
+El archivo completo esta dentro de un IIFE:
+    (() => { "use strict"; ... })();
+Se ejecuta cuando el DOM esta listo (lineas 2076-2080).
+
+4.1 UTILIDADES (lineas 1-39)
+----------------------------
+   4   $            querySelector
+   5   $$           querySelectorAll -> Array
+   6   icon         Devuelve <svg><use href="#id"></use></svg>
+   8   wait         Promesa con setTimeout
+   9   reducedMotion Media query prefers-reduced-motion
+  11   escapeHTML   Escapa & < > " ' para insertar texto seguro
+  23   demoClock    Reloj demo: inicia a las 09:42:18
+  28   simulatedSeconds  Segundos transcurridos desde el inicio
+  31   chileTime    Formatea HH:MM o HH:MM:SS
+  39   nowChile     Hora simulada corta
+
+4.2 DATOS DEMO (lineas 41-292)
+------------------------------
+  41-45   riskMeta   Etiquetas/iconos/clases de riesgo rojo, amarillo, verde
+  47-51   typeMeta   Nombre e icono de aseo, bacheo, alumbrado
+  53-108  zones      6 macrozonas con id, shape, nombre, riesgo, detalle, x, y
+ 110-213  tickets    6 casos con id, tipo, titulo, direccion, zona, riesgo,
+                     urgencia, severidad, ETA, reportes, x, y, assignedCrew
+ 215-280  fleet      4 camiones con id, nombre, ruta, zona, online, camara,
+                     vibracion, velocidad, ubicacion, sync, pendientes, x, y
+ 282-292  appState   Estado del dashboard:
+                     view, lastSync, mapMode, activeLayers, activeRisk,
+                     selectedZone, selectedTickets, activeFleetId, isDispatching
+ 294      toastTimer
+
+4.3 NAVEGACION Y VISTAS (lineas 356-414)
+----------------------------------------
+ 356   renderViewNavigation  Marca el enlace activo y aria-current
+ 368   showView              Oculta/muestra vistas, titulo y foco
+ 389   initialViewFromHash   Lee #despacho / #ciudadano
+ 394   setupRouting          Clics + pushState + popstate + hashchange
+
+4.4 MAPA (lineas 416-804)
+-------------------------
+ 416   setMapMode             Cambia Semaforo / Incidentes
+ 436   renderZones            Genera los botones de macrozona
+ 456   renderPins             Genera pines de tickets y camiones
+ 482   updateMapState         Aplica filtros, muestra/oculta pines, resumen
+ 571   closeMapPopover        Cierra y limpia el popover
+ 581   rememberPopoverTrigger Guarda el elemento que tenia el foco
+ 588   focusPopoverHeading    Lleva el foco al titulo del popover
+ 595   openZonePopover        Ficha de una macrozona
+ 620   openTicketPopover      Ficha de un ticket
+ 642   focusTicketList        Lleva el foco a la lista de tickets
+ 648   filterToTicket         Filtra la lista por la zona del ticket
+ 668   selectZone             Selecciona/deselecciona zona
+ 683   clearAllMapFilters     Limpia riesgo, zona y seleccion
+ 693   setupMap               Conecta segmentos, capas, riesgo, pines,
+                              popover, chip de zona y tecla Escape
+
+4.5 TICKETS Y DESPACHO (lineas 806-1001)
+----------------------------------------
+ 806   ticketRowMarkup        HTML de una fila de ticket
+ 843   renderTickets          Pinta la lista visible y contadores
+ 880   updateBulkBar          Estado de la barra de despacho agrupado
+ 902   toggleTicketSelection  Suma/quita un ticket de la seleccion
+ 923   setupTickets           Conecta seleccion, limpiar filtros y despacho
+ 944   openDispatchDialog     Abre el dialogo con los casos elegidos
+ 972   confirmDispatch        Simula 780 ms y asigna la cuadrilla
+ 999   setupDispatchDialog    Conecta el boton de confirmar
+
+4.6 FLOTA (lineas 1003-1130)
+----------------------------
+1003   fleetCardMarkup        HTML de una ficha de camion
+1035   renderFleet            Pinta las 4 fichas
+1041   fleetDialogMarkup      HTML del detalle de telemetria
+1074   openFleetDialog        Abre el dialogo de flota
+1085   setupFleet             Conecta fichas, comprobar senal y ver en mapa
+
+4.7 RELOJ, SYNC Y REFRESCO (lineas 1132-1158)
+---------------------------------------------
+1132   setupRefresh    Simula sincronizacion de 640 ms
+1152   setupLiveMeta   Inicia reloj, sync y horas de corte
+ 332   updateClock     Actualiza #live-clock
+ 341   updateSyncLabel Actualiza "Actualizado hace X"
+ 349   updateCutLabels Actualiza cortes de mapa y flota
+
+4.8 DIALOGOS Y FOCO (lineas 1160-1197)
+--------------------------------------
+1160   setBackgroundInert  Vuelve inerte header/main/footer/skip-link
+1166   openAppDialog       showModal + guarda el foco previo
+1174   setupDialogs        Cierra con X, fondo o Escape y restaura foco
+
+4.9 CANAL CIUDADANO (lineas 1199-2059)
+--------------------------------------
+1201-1226  chatCategories  bacheo / alumbrado / aseo:
+                           key, title, location, zone, closedTitle, transcript
+1228-1243  chatState       stage, report, authorized, rescheduled,
+                           visitWindow, points, redeemed, photoURL, busy
+1245       chatRenderToken  Evita renderizados async obsoletos
+1246-1247  recordingTimer / recordingSeconds
+1249-1274  rewards         4 recompensas: huerto 250, piscina 300,
+                           compost 200, aseo 500
+
+1276   stageButtons            Botones de etapa (desktop y movil)
+1280   updateStageNavigation   Marca la etapa activa
+1292   reportByCategory        Define el reporte por categoria (SIN USO)
+1302   reportCategoryFromText  Clasifica texto por palabras clave
+1312   chatTimeLabel           Hora para los mensajes
+1316   avatarMarkup            Avatar "M" del bot
+1320   botBubbleMarkup         Burbuja del bot
+1331   botCardMarkup           Burbuja con tarjeta
+1342   userBubbleMarkup        Burbuja del usuario
+1352   audioBubbleMarkup       Burbuja de audio simulada
+1362   voiceCardMarkup         Tarjeta "Reportar por nota de voz"
+1380   locationCardMarkup      Tarjeta de confirmacion de ubicacion
+1399   userReportMarkup        Mensaje del usuario segun via (voz/texto/foto)
+1414   progressMarkup          Pasos Recibido / Priorizado / Cuadrilla
+1423   confirmationCardMarkup  Tarjeta de folio, ETA y acciones
+1468   beforeEvidenceSVG       Ilustracion SVG "Antes" (bache)
+1502   afterEvidenceSVG        Ilustracion SVG "Despues" (parche)
+1538   closureCardMarkup       Tarjeta de cierre con evidencia y puntos
+1590   renderChatStage         Renderiza la etapa actual del chat
+1637   scrollChatToBottom      Baja el scroll del log
+1643   prepareNewConversation  Reinicia el reporte a bacheo/voz
+1657   resetSimulation         Reinicia chat, puntos y canjes
+1675   closeOpenChatDialogs    Cierra dialogos del chat
+1682   goToStage               Salta a report / confirm / close
+1703   removeVoicePrompt      Quita la tarjeta de voz inicial
+1709   appendToLog             Inserta HTML al final del log
+1716   appendTyping            Muestra "escribiendo..."
+1730   removeTyping            Quita "escribiendo..."
+1734   showReportLocation      Pausa 620 ms y muestra la ubicacion
+1745   startRecording          Inicia grabacion simulada y temporizador
+1768   stopRecording           Detiene y restaura el composer
+1779   sendVoiceReport         Envia nota de voz simulada (bacheo)
+1803   sendTextReport          Envia texto y clasifica categoria
+1834   sendPhotoReport         Carga foto local con object URL
+1860   confirmReportLocation   Simula 640 ms y pasa a Folio
+1875   updateLiveLocation      Actualiza direccion en la tarjeta
+1882   openLocationDialog      Abre correccion de direccion
+1892   setRewardsPoints        Sincroniza y renderiza puntos (SIN USO)
+1897   syncPointBalances       Actualiza todos los saldos visibles
+1905   rewardRowMarkup         HTML de una recompensa
+1923   renderRewards           Pinta la lista de recompensas
+1931   openRewardsDialog       Abre el dialogo de recompensas
+1938   redeemReward            Descuenta puntos y marca canje
+1948   openRescheduleDialog    Abre reprogramacion
+1957   confirmReschedule       Guarda ventana y confirma visita
+1968   confirmLocationChange   Guarda direccion elegida
+1978   setupChat               Conecta todo el simulador del chat
+
+4.10 ARRANQUE (lineas 2061-2080)
+--------------------------------
+2061   boot  Ejecuta en orden:
+         setupRouting
+         setupLiveMeta
+         setupMap
+         setupTickets
+         setupDispatchDialog
+         setupFleet
+         setupRefresh
+         setupDialogs
+         setupChat
+         showView(initialViewFromHash())
+         updateSyncLabel()
+         updateCutLabels()
+
+4.11 INDICE ALFABETICO DE FUNCIONES
+-----------------------------------
+appendToLog .................. 1709
+appendTyping ................. 1716
+afterEvidenceSVG ............. 1502
+audioBubbleMarkup ............ 1352
+avatarMarkup ................. 1316
+beforeEvidenceSVG ............ 1468
+botBubbleMarkup .............. 1320
+botCardMarkup ................ 1331
+boot ......................... 2061
+chatTimeLabel ................ 1312
+clearAllMapFilters ........... 683
+closeMapPopover .............. 571
+closeOpenChatDialogs ......... 1675
+closureCardMarkup ............ 1538
+confirmationCardMarkup ....... 1423
+confirmDispatch .............. 972
+confirmLocationChange ........ 1968
+confirmReportLocation ........ 1860
+confirmReschedule ............ 1957
+fleetCardMarkup .............. 1003
+fleetDialogMarkup ............ 1041
+filterToTicket ............... 648
+focusPopoverHeading .......... 588
+focusTicketList .............. 642
+getFleet ..................... 316
+getTicket .................... 312
+getZone ...................... 308
+goToStage .................... 1682
+initialViewFromHash .......... 389
+locationCardMarkup ........... 1380
+openAppDialog ................ 1166
+openDispatchDialog ........... 944
+openFleetDialog .............. 1074
+openLocationDialog ........... 1882
+openRescheduleDialog ......... 1948
+openRewardsDialog ............ 1931
+openTicketPopover ............ 620
+openZonePopover .............. 595
+prepareNewConversation ....... 1643
+progressMarkup ............... 1414
+redeemReward ................. 1938
+rememberPopoverTrigger ....... 581
+removeTyping ................. 1730
+removeVoicePrompt ............ 1703
+renderChatStage .............. 1590
+renderFleet .................. 1035
+renderPins ................... 456
+renderRewards ................ 1923
+renderTickets ................ 843
+renderViewNavigation ......... 356
+renderZones .................. 436
+reportByCategory ............. 1292 (sin uso)
+reportCategoryFromText ....... 1302
+resetSimulation .............. 1657
+rewardRowMarkup .............. 1905
+scrollChatToBottom ........... 1637
+selectZone ................... 668
+sendPhotoReport .............. 1834
+sendTextReport ............... 1803
+sendVoiceReport .............. 1779
+setBackgroundInert ........... 1160
+setMapMode ................... 416
+setRewardsPoints ............. 1892 (sin uso)
+setupChat .................... 1978
+setupDialogs ................. 1174
+setupDispatchDialog .......... 999
+setupFleet ................... 1085
+setupLiveMeta ................ 1152
+setupMap ..................... 693
+setupRefresh ................. 1132
+setupRouting ................. 394
+setupTickets ................. 923
+showReportLocation ........... 1734
+showToast .................... 296
+showView ..................... 368
+stageButtons ................. 1276
+startRecording ............... 1745
+stopRecording ................ 1768
+syncPointBalances ............ 1897
+ticketRowMarkup .............. 806
+toggleTicketSelection ........ 902
+updateBulkBar ................ 880
+updateClock .................. 332
+updateCutLabels .............. 349
+updateLiveLocation ........... 1875
+updateMapState ............... 482
+updateStageNavigation ........ 1280
+updateSyncLabel .............. 341
+userBubbleMarkup ............. 1342
+userReportMarkup ............. 1399
+visibleTickets ............... 324
+voiceCardMarkup .............. 1362
+zoneTicketCount .............. 320
+
+
+================================================================================
+5. IMAGENES Y GRAFICOS: COMO SE CONSTRUYEN
+================================================================================
+
+5.1 LOGO DE MARCA
+-----------------
+Ubicacion: index.html 164-170
+Tecnica:   SVG inline
+Elementos: cuadrado redondeado azul marino, trazo en forma de M, dos nodos
+           (punto salvia y punto verde) y una curva de conexion.
+Significado: M de Maipu + red/nodos = "ecosistema nervioso urbano".
+Replicas:
+  - assets/favicon.svg (mismo motivo, 64x64)
+  - Avatar de MIMA en el chat (index.html 511-517)
+
+5.2 ICONOS
+----------
+Ubicacion: index.html 18-158
+Tecnica:   33 <symbol> SVG dentro de un sprite oculto
+Uso:       <use href="#i-nombre">
+Estilo:    trazo 1.8, linecap/linejoin round, currentColor
+Ventaja:   no hay peticiones de red ni archivos por icono
+
+5.3 MAPA OPERATIVO
+------------------
+Ubicacion HTML: index.html 298-377
+Ubicacion JS:   renderZones 436, renderPins 456, updateMapState 482
+Ubicacion CSS:  882-1366
+
+Composicion por capas (de abajo hacia arriba):
+  1. SVG base .map-art con viewBox 0 0 920 520
+  2. Seis poligonos de macrozona con data-zone-shape
+  3. Parques, agua, calles menores, calles principales y borde
+  4. Etiquetas HTML de calles (.street-label)
+  5. Capa HTML de macrozonas (#zones-layer)
+  6. Capa HTML de pines y camiones (#pins-layer)
+  7. Chip de filtro, popover y resumen
+
+Datos que alimentan el mapa:
+  - zones[]  -> id, shape, nombre, riesgo, detalle, x%, y%
+  - tickets[] -> x%, y%, tipo, riesgo, zona
+  - fleet[]   -> x%, y%, estado online
+
+Modos:
+  - status:    muestra zonas coloreadas y sus etiquetas; oculta pines.
+  - incidents: oculta etiquetas de zona; muestra tickets y camiones.
+
+Filtros:
+  - Capas: data-layer="aseo|bacheo|alumbrado"
+  - Riesgo: data-risk="red|yellow|green|all"
+  - Zona: clic en .zone-label o en un pin
+  - Ambos modos se controlan con data-map-mode en #map-stage
+
+Por que se ve alineado:
+  El SVG usa preserveAspectRatio="none" y los overlays usan left/top en %.
+  Al cambiar el tamano del panel, ambos se estiran juntos.
+  No es un mapa cartografico: la geometria es ilustrativa.
+
+5.4 EVIDENCIA ANTES / DESPUES
+-----------------------------
+Ubicacion JS:  beforeEvidenceSVG 1468, afterEvidenceSVG 1502
+Ubicacion UI:  closureCardMarkup 1538
+Ubicacion CSS: 3262-3333
+
+Tecnica: dos SVG de 320x240 generados como strings.
+Antes:
+  - degradado de asfalto oscuro
+  - filtro feTurbulence + feColorMatrix para grano fotografico
+  - bache con varias capas de negro/gris
+  - grietas, lineas de calzada, borde de vereda
+  - letrero/cono naranja y vegetacion
+Despues:
+  - mismo encuadre
+  - parche gris claro que cubre el bache
+  - menos contraste y grano
+  - letrero/cono desplazado
+Presentacion:
+  - .evidence-compare en dos columnas sobre fondo azul
+  - etiquetas HTML "Antes" y "Despues"
+  - horas superpuestas 09:12 y 10:38
+  - caption "Registro simulado de la cuadrilla"
+Limitacion:
+  La ilustracion siempre muestra un bache, aunque el reporte haya sido de
+  alumbrado o aseo.
+
+5.5 FOTO DEL REPORTE
+--------------------
+Ubicacion HTML: index.html 548 (#photo-input)
+Ubicacion JS:   sendPhotoReport 1834 y userReportMarkup 1399
+Ubicacion CSS:  2865-2893
+
+Flujo:
+  1. El usuario pulsa el clip o "Enviar una foto".
+  2. Se abre el selector de archivos (accept="image/*").
+  3. sendPhotoReport valida que sea image/*.
+  4. chatState.photoURL = URL.createObjectURL(file)
+  5. Se inserta <img class="chat-photo-image" src="...">
+  6. La imagen se muestra localmente, con caption.
+No se sube a ningun servidor y no se analiza su contenido.
+La URL no se revoca al reiniciar (ver notas tecnicas).
+
+5.6 AUDIO SIMULADO
+------------------
+Ubicacion JS:  audioBubbleMarkup 1352, startRecording 1745,
+               sendVoiceReport 1779
+Ubicacion CSS: 2795-2863 (burbuja) y 3546-3630 (grabadora)
+
+- No usa MediaRecorder ni getUserMedia.
+- 11 barras CSS simulan la onda.
+- La grabacion avanza con setInterval hasta 45 s.
+- Al enviar se muestra duracion y transcripcion simulada.
+- El icono de play es decorativo: no reproduce audio.
+
+5.7 TABLA RESUMEN DE "IMAGENES"
+-------------------------------
+  Elemento             Archivo / linea              Tecnica
+  Logo                 index.html 164-170           SVG inline
+  Favicon              assets/favicon.svg           SVG
+  Iconos               index.html 18-158            Sprite SVG
+  Avatar MIMA          index.html 511-517           SVG inline
+  Avatar mensajes      app.js 1316                  Span HTML
+  Mapa                 index.html 298-357 + JS      SVG + HTML
+  Evidencia antes      app.js 1468                  SVG generado
+  Evidencia despues    app.js 1502                  SVG generado
+  Foto del usuario     app.js 1834 + CSS 2879      <img> + object URL
+  Onda de audio        CSS 2820 y 3588              Barras CSS
+  Fuentes              assets/fonts                 WOFF2
+
+
+================================================================================
+6. MODELO DE DATOS
+================================================================================
+
+6.1 MACROZONAS (zones)
+----------------------
+ID                 NOMBRE              RIESGO   DETALLE             X%   Y%
+rinconada          Rinconada           red      Pasaje oscuro       24   29
+ciudad-satelite    Ciudad Satelite     yellow   Feria y accesos     57   19
+pajaritos          Pajaritos           red      Riesgo de caida     41   46
+centro             Centro              yellow   Atencion moderada   29   65
+farfana            La Farfana          green    Mantencion          22   80
+malloco            Malloco             green    Ruta preventiva     75   69
+
+6.2 TICKETS
+-----------
+ID       TIPO        ZONA              RIESGO  URGENCIA  SEVERIDAD    ETA    REPORTES
+M-2471   alumbrado   Rinconada         red     Alta      Critica      10:20  5 reportes
+M-2468   bacheo      Pajaritos         red     Alta      Critica      10:35  12 reportes
+M-2463   aseo        Centro            yellow  Media     Alta         11:10  8 reportes
+M-2459   aseo        Ciudad Satelite   yellow  Media     Moderada     11:40  4 reportes
+M-2455   alumbrado   La Farfana        green   Baja      Preventiva   15:30  Planificado
+M-2451   bacheo      Malloco           green   Baja      Preventiva   16:10  Planificado
+
+Campos completos:
+  id, type, title, address, zoneId, risk, urgency, urgencyNote,
+  severity, severityNote, eta, reports, x, y, assignedCrew
+
+6.3 FLOTA
+---------
+ID   NOMBRE      RUTA                       ZONA             ONLINE  NOVEDAD
+12   Camion 12   Rinconada - Ruta 2         Rinconada        si      3 baches detectados
+07   Camion 07   Ciudad Satelite - Ruta 1   Ciudad Satelite  si      Sin novedades
+03   Camion 03   Centro - Ruta 4            Centro           si      1 contenedor lleno
+09   Camion 09   Malloco - Ruta 6           Malloco          no      14 lecturas en cola
+
+Campos completos:
+  id, name, route, zoneId, online, camera, cameraDetail, vibration,
+  speed, location, lastSync, pending, x, y
+
+6.4 CATEGORIAS DEL CHAT
+-----------------------
+Clave       TITULO DEL REPORTE                  DIRECCION
+bacheo      Bache profundo en la calzada        Av. Pajaritos con Av. Los Pinos
+alumbrado   Luminaria apagada en el pasaje      Pasaje Los Aromos, Rinconada
+aseo        Microbasural en la via publica      Av. 5 de Abril con Portales
+
+Cada categoria incluye:
+  key, title, location, zone, closedTitle, transcript
+
+Clasificacion por texto (reportCategoryFromText):
+  luz / luminaria / poste / oscur / farol       -> alumbrado
+  basura / contenedor / microbasural / aseo /
+  residuo                                       -> aseo
+  cualquier otro texto                          -> bacheo
+La funcion solo clasifica el tipo; no extrae direcciones del texto.
+
+6.5 ESTADO DEL CHAT
+-------------------
+chatState:
+  stage        "report" | "confirm" | "close"
+  report       copia de la categoria + via + duration + userText
+  authorized   visita autorizada
+  rescheduled  visita reprogramada
+  visitWindow  ventana de atencion (por defecto "Hoy, 10:20 a 10:50")
+  points       saldo inicial 340
+  redeemed     Set de recompensas canjeadas
+  photoURL     URL temporal de la foto
+  busy         bloqueo durante animaciones
+
+6.6 RECOMPENSAS
+---------------
+ID        TITULO                              COSTO
+huerto    Taller de huertos comunitarios       250 pts
+piscina   Entrada a la piscina municipal       300 pts
+compost   Taller de compostaje                 200 pts
+aseo      $5.000 en derechos de aseo           500 pts
+
+6.7 FLUJO DE PUNTOS
+------------------
+- Saldo inicial: 340 pts.
+- El cierre muestra "+40 pts", pero es solo texto: no suma al saldo.
+- Canjear descuenta el costo y marca la recompensa como usada.
+- Si no alcanza, el boton queda deshabilitado y muestra "Faltan X pts".
+- Reiniciar la simulacion restaura 340 pts y limpia los canjes.
+
+
+================================================================================
+7. FLUJOS FUNCIONALES
+================================================================================
+
+7.1 NAVEGACION GENERAL
+----------------------
+Header -> Despacho municipal / Canal ciudadano
+  - clic interceptado por setupRouting
+  - pushState con #despacho o #ciudadano
+  - showView oculta/muestra la seccion y mueve el foco
+  - Atras/Adelante del navegador funciona por popstate/hashchange
+
+7.2 DESPACHO: MAPA
+------------------
+1. Se pintan zonas, pines y camiones desde los arreglos.
+2. El modo inicial es "status" (semaforo).
+3. Clic en "Incidentes" muestra pines.
+4. Clic en una capa oculta pines de ese tipo y fuerza Incidentes.
+5. Clic en un riesgo atenua zonas y filtra pines y tickets.
+6. Clic en una zona abre popover, filtra la lista y resalta el poligono.
+7. Clic en un pin de ticket abre su ficha.
+8. Clic en un camion abre el detalle de flota.
+9. Escape o clic en X cierra el popover y restaura el foco.
+
+7.3 DESPACHO: TICKETS Y DESPACHO AGRUPADO
+-----------------------------------------
+1. Cada fila tiene un boton de seleccion.
+2. Con 1 caso, el despacho sigue deshabilitado.
+3. Con 2 o mas, se habilita "Despacho agrupado".
+4. El dialogo muestra los casos, distancia, tiempo y ahorro.
+5. Se elige cuadrilla (M-04, M-02, M-06).
+6. confirmDispatch espera 780 ms, asigna la cuadrilla a cada ticket,
+   limpia la seleccion, re-renderiza y muestra un toast.
+7. Los tickets asignados ya no se pueden volver a seleccionar.
+
+7.4 DESPACHO: FLOTA
+-------------------
+1. La flota se pinta en 4 fichas.
+2. Camion 09 esta offline y muestra "14 lecturas en cola local".
+3. "Comprobar senal" simula 1.050 ms y siempre informa que sigue sin senal.
+4. "Ver en el mapa" cambia al dashboard, activa Incidentes, hace scroll
+   y resalta el camion durante 2,4 s.
+
+7.5 DESPACHO: ACTUALIZAR
+------------------------
+- Boton #refresh-dashboard: 640 ms, actualiza lastSync y horas de corte,
+  muestra toast "Panel sincronizado".
+- Reloj simulado cada 30 s; etiqueta de sync cada 1 s.
+
+7.6 CIUDADANO: REPORTE
+----------------------
+Etapa "report":
+  - MIMA da la bienvenida.
+  - Opciones: grabar voz, enviar foto o escribir.
+
+Voz:
+  - startRecording oculta composer y muestra barra.
+  - Temporizador hasta 45 s.
+  - Enviar -> sendVoiceReport -> burbuja de audio + transcripcion.
+  - Categoria forzada: bacheo.
+
+Texto:
+  - Enter o boton enviar -> sendTextReport.
+  - reportCategoryFromText decide bacheo/alumbrado/aseo.
+  - Se muestra la burbuja del usuario.
+
+Foto:
+  - clip -> #photo-input -> sendPhotoReport.
+  - Se muestra la imagen local.
+  - Categoria forzada: bacheo.
+
+Despues de cualquier via:
+  - showReportLocation espera 620 ms, muestra "escribiendo..."
+  - Luego aparece la tarjeta de ubicacion.
+  - "Si, es aqui" -> confirmReportLocation (640 ms) -> etapa confirm.
+  - "Corregir" -> location-dialog.
+
+7.7 CIUDADANO: CONFIRMACION
+---------------------------
+Etapa "confirm":
+  - Burbuja con el reporte del usuario.
+  - MIMA confirma direccion y asignacion.
+  - Tarjeta de folio MM-2487:
+      pasos Recibido / Priorizado / Cuadrilla M-04
+      llegada estimada
+      prioridad alta o media segun categoria
+  - Acciones:
+      Autorizar visita -> authorized = true
+      Reprogramar -> reschedule-dialog -> confirmReschedule
+      Ver cierre -> etapa close
+
+7.8 CIUDADANO: CIERRE
+---------------------
+Etapa "close":
+  - Tarjeta "Caso cerrado" con folio MM-2487.
+  - Evidencia antes/despues generada en SVG.
+  - Huella reducida: 3,8 kg CO2e.
+  - "+40 pts" informativo.
+  - Saldo real de puntos y boton "Ver recompensas".
+  - Recompensas: canje simulado con descuento real de puntos en la UI.
+
+7.9 CIUDADANO: REINICIO Y SALTOS
+--------------------------------
+- #reset-chat -> resetSimulation: vuelve a report, 340 pts, sin canjes,
+  sin foto, sin autorizacion.
+- Botones de etapa (aside y moviles):
+    Reporta -> reset
+    Confirma -> etapa confirm con estado limpio
+    Cierre -> etapa close con authorized = true
+- Al cambiar de etapa se detiene cualquier grabacion.
+
+
+================================================================================
+8. ESTADOS Y CLASES CSS
+================================================================================
+
+8.1 MAPA
+--------
+.is-filtered     Zona atenuada por filtro de riesgo
+.is-selected     Zona seleccionada (borde y sombra)
+.is-muted        Etiqueta de zona deshabilitada por riesgo
+.is-layer-off    Pin oculto por capa desactivada
+.is-risk-off     Pin oculto por riesgo
+.is-zone-off     Pin oculto por zona
+.is-focused      Halo temporal en pin o camion
+.is-offline      Camion sin conexion (punto amarillo)
+data-map-mode    "status" | "incidents"
+
+8.2 TICKETS
+-----------
+.is-selected     Fila marcada para despacho
+.is-assigned     Fila ya asignada a una cuadrilla
+.is-focused      Resaltado temporal al llegar desde el mapa
+.is-urgent       Urgencia alta en rojo
+.is-dimmed       Filtro de riesgo no activo
+.is-loading      Boton actualizar en curso
+
+8.3 CHAT
+--------
+.is-active       Etapa o segmento activo
+.is-yellow       Estado de visita reprogramada
+.is-done         Paso completado del progreso
+.has-text        Composer con texto: oculta microfono y muestra enviar
+.is-offline      Flota sin conexion
+[open]           Dialogo abierto
+[aria-pressed]   Estado de filtros y seleccion
+[aria-current]   Vista o etapa actual
+
+8.4 VISIBILIDAD
+---------------
+[hidden]         display: none !important
+.view[hidden]    Vista inactiva
+.msg / .toast    Animaciones de entrada
+
+
+================================================================================
+9. ACCESIBILIDAD
+================================================================================
+
+- Enlace "Saltar al contenido principal" (.skip-link).
+- Texto solo para lectores (.sr-only).
+- Foco visible en botones, enlaces y controles.
+- Objetivos tactiles de al menos 44x44 px.
+- Navegacion por teclado y restauracion de foco en popovers y dialogos.
+- Dialogos nativos <dialog> con showModal, cierre con Escape y backdrop.
+- Fondo inerte mientras hay un dialogo abierto (setBackgroundInert).
+- role="log" y aria-live="polite" en el chat.
+- aria-pressed en filtros, seleccion y segmentos.
+- aria-current en vista y etapa activas.
+- Etiquetas aria-label en iconos y botones sin texto.
+- Estados redundantes: color + texto + icono (no solo color).
+- prefers-reduced-motion desactiva animaciones y scroll suave.
+- Contraste y tamanos de texto pensados para WCAG AA.
+
+
+================================================================================
+10. DATOS REALES VS SIMULADOS
+================================================================================
+
+REAL
+----
+- Nombres de calles y sectores de Maipu.
+- Estructura HTML, CSS y JavaScript.
+- Navegacion por hash y boton Atras.
+- Filtros, seleccion, dialogos y estados de interfaz.
+- La foto del usuario se muestra realmente en el navegador.
+
+SIMULADO
+--------
+- Folios, horarios, costos, ahorros, puntos y estados operativos.
+- Nota de voz: no usa microfono ni graba audio.
+- Camara IA, vibracion y telemetria de flota.
+- Evidencia antes/despues: ilustracion SVG.
+- Despacho agrupado y sincronizacion.
+- Recompensas y canjes.
+- Reloj: parte a las 09:42:18 y avanza con el tiempo real.
+- Todo se pierde al recargar: no hay persistencia.
+
+
+================================================================================
+11. NOTAS Y DEUDA TECNICA
+================================================================================
+
+1. Funciones definidas sin uso:
+   - reportByCategory (linea 1292)
+   - setRewardsPoints (linea 1892)
+
+2. Iconos definidos sin uso:
+   - i-wifi, i-receipt, i-building, i-users
+
+3. La foto del reporte no revoca su object URL:
+   - Se acumula memoria si se suben muchas fotos sin recargar.
+   - En un mockup es tolerable; en produccion se debe llamar
+     URL.revokeObjectURL al reemplazar o reiniciar.
+
+4. Las capas del mapa no filtran la lista de tickets:
+   - activeLayers afecta pines y resumen del mapa, no visibleTickets().
+   - La lista solo se filtra por zona y riesgo.
+
+5. El "+40 pts" del cierre es solo texto:
+   - chatState.points no aumenta al cerrar.
+   - Solo disminuye al canjear recompensas.
+
+6. La evidencia siempre muestra un bache:
+   - No cambia si el reporte es de alumbrado o aseo.
+   - El titulo del cierre si cambia por categoria.
+
+7. Voz y foto siempre se clasifican como bacheo:
+   - El texto es la unica via que clasifica categoria.
+   - Ninguna via extrae direcciones del contenido.
+
+8. El mapa es esquematico:
+   - preserveAspectRatio="none" estira el SVG.
+   - La geometria no es cartografica ni GPS.
+
+9. No hay backend ni almacenamiento:
+   - Recargar la pagina reinicia todo el estado.
+   - No hay envio real de mensajes, correos ni datos.
+
+10. El temporizador de grabacion no genera audio:
+    - Es solo una simulacion visual con setInterval.
+
+11. Los dialogos dependen de <dialog> nativo:
+    - Navegadores muy antiguos no lo soportan.
+
+12. El HTML usa un sprite SVG grande al inicio:
+    - Es intencional para evitar peticiones y mantener todo local.
+
+
+================================================================================
+12. COMO EDITAR EL MOCKUP
+================================================================================
+
+12.1 CAMBIAR COLORES
+--------------------
+Editar los tokens en :root (styles.css, 17-55):
+  --ink, --paper, --surface, --green, --lime, --red, --amber, etc.
+
+12.2 AGREGAR UN TICKET
+----------------------
+En app.js, arreglo tickets (110-213), agregar un objeto con:
+  id, type, title, address, zoneId, risk, urgency, urgencyNote,
+  severity, severityNote, eta, reports, x, y, assignedCrew
+El pin y la fila se generan automaticamente.
+x/y son porcentajes del escenario del mapa.
+
+12.3 AGREGAR UNA MACROZONA
+--------------------------
+Requiere cuatro cambios:
+  1. Objeto en zones[] (app.js 53-108) con shape, x, y y riesgo.
+  2. Poligono SVG con data-zone-shape en index.html (313-318).
+  3. Clase .zone-fill-nueva con color en styles.css (906-934).
+  4. Etiqueta de zona si se desea; se genera sola desde zones[].
+La geometria se dibuja a mano en el viewBox 920x520.
+
+12.4 CAMBIAR TEXTOS DEL CHAT
+----------------------------
+- Mensajes generales: renderChatStage (1590).
+- Categorias y direcciones: chatCategories (1201-1226).
+- Folio y ETA: confirmationCardMarkup (1423).
+- Cierre y evidencia: closureCardMarkup (1538).
+- Recompensas: rewards (1249-1274).
+
+12.5 CAMBIAR PUNTOS
+-------------------
+- Saldo inicial: chatState.points (1239) y resetSimulation (1661).
+- Costos: rewards (1249-1274).
+- Texto "+40 pts": closureCardMarkup (1572).
+- Importante: si se quiere que el cierre sume puntos, agregar la suma en
+  goToStage("close") o en closureCardMarkup y volver a sincronizar.
+
+12.6 CAMBIAR EL MAPA
+--------------------
+- Formas: paths del SVG en index.html 313-354.
+- Colores: .zone-fill-* en styles.css 906-934.
+- Etiquetas: .street-label y sus clases en index.html 359-366 y
+  styles.css 998-1043.
+- Posiciones de pines: x/y en zones[], tickets[] y fleet[].
+- Importante: mantener x/y en porcentaje para que sigan al SVG.
+
+12.7 CAMBIAR LA FOTO DEL CIERRE
+-------------------------------
+Las ilustraciones son funciones que devuelven SVG:
+  beforeEvidenceSVG (1468)
+  afterEvidenceSVG (1502)
+Se pueden reemplazar por <img src="..."> si se usan fotos reales, pero
+el proyecto esta pensado para funcionar sin archivos de imagen.
+
+12.8 PROBAR EN LOCAL
+--------------------
+Opcion 1: abrir index.html directamente en Chrome, Edge o Firefox.
+Opcion 2: servidor estatico:
+  python -m http.server 8000
+  http://localhost:8000
+
+
+================================================================================
+FIN DEL DOCUMENTO
+================================================================================

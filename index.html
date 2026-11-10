@@ -1,0 +1,722 @@
+﻿<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MiMaipÃº Â· Ecosistema Nervioso Urbano</title>
+  <meta name="description" content="Mockup interactivo del centro de despacho municipal y del canal ciudadano MiMaipÃº. Datos de demostraciÃ³n.">
+  <meta name="theme-color" content="#0b2238">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <svg class="icon-sprite" aria-hidden="true">
+    <defs>
+      <symbol id="i-grid" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+        <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+        <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+        <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+      </symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24">
+        <path d="M20 11.6a7.9 7.9 0 0 1-8.4 7.8 8.6 8.6 0 0 1-3.5-.8L4 20l1.4-3.8A7.5 7.5 0 0 1 4 11.6 7.9 7.9 0 0 1 12.3 4 7.9 7.9 0 0 1 20 11.6Z"></path>
+        <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"></path>
+      </symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24">
+        <path d="M20 10.2c0 5.4-8 11.3-8 11.3S4 15.6 4 10.2a8 8 0 1 1 16 0Z"></path>
+        <circle cx="12" cy="10" r="2.5"></circle>
+      </symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8.5"></circle>
+        <path d="M12 7.5v5l3.5 2"></path>
+      </symbol>
+      <symbol id="i-lamp" viewBox="0 0 24 24">
+        <path d="M9 18h6M10 21h4"></path>
+        <path d="M8.2 14.8A5.2 5.2 0 1 1 15.8 14.8L14.6 18H9.4l-1.2-3.2Z"></path>
+        <path d="M12 5.7v.2"></path>
+      </symbol>
+      <symbol id="i-road" viewBox="0 0 24 24">
+        <path d="M5 21 8.5 3h7L19 21"></path>
+        <path d="M12 6v3M12 12.5v3M12 19v1"></path>
+      </symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24">
+        <path d="M4 7h16M9 7V4.8h6V7M6.5 7l.8 13h9.4l.8-13"></path>
+        <path d="M10 11v5M14 11v5"></path>
+      </symbol>
+      <symbol id="i-truck" viewBox="0 0 24 24">
+        <path d="M3 6.5h10.5v10H3z"></path>
+        <path d="M13.5 10h4l3 3.2v3.3h-7z"></path>
+        <circle cx="7" cy="18" r="2"></circle>
+        <circle cx="17.5" cy="18" r="2"></circle>
+        <path d="M9 18h6.5M3 18h2"></path>
+      </symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24">
+        <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"></path>
+        <circle cx="12" cy="13.5" r="3.3"></circle>
+      </symbol>
+      <symbol id="i-vibration" viewBox="0 0 24 24">
+        <path d="M4 9v6M8 6v12M12 3v18M16 7v10M20 10v4"></path>
+      </symbol>
+      <symbol id="i-wifi" viewBox="0 0 24 24">
+        <path d="M3.5 9.5a13 13 0 0 1 17 0M6.5 13a8.5 8.5 0 0 1 11 0M9.8 16.4a3.8 3.8 0 0 1 4.4 0"></path>
+        <circle cx="12" cy="20" r=".7" fill="currentColor" stroke="none"></circle>
+      </symbol>
+      <symbol id="i-cloud-off" viewBox="0 0 24 24">
+        <path d="m3 3 18 18"></path>
+        <path d="M8.5 6.4A6 6 0 0 1 18 12h1.2a3.3 3.3 0 0 1 1.5 6.2M15.7 18H6.4A4.4 4.4 0 0 1 5 9.5"></path>
+      </symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24">
+        <path d="M20 7v5h-5"></path>
+        <path d="M19 12a7.5 7.5 0 1 0-1.2 5"></path>
+      </symbol>
+      <symbol id="i-x" viewBox="0 0 24 24">
+        <path d="m6 6 12 12M18 6 6 18"></path>
+      </symbol>
+      <symbol id="i-check" viewBox="0 0 24 24">
+        <path d="m5 12.5 4.2 4.2L19 6.8"></path>
+      </symbol>
+      <symbol id="i-check-circle" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8.8"></circle>
+        <path d="m8 12.2 2.6 2.5 5.4-5.4"></path>
+      </symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24">
+        <rect x="9" y="3" width="6" height="11" rx="3"></rect>
+        <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M8.5 21h7"></path>
+      </symbol>
+      <symbol id="i-photo" viewBox="0 0 24 24">
+        <rect x="3.5" y="5" width="17" height="14" rx="2"></rect>
+        <circle cx="9" cy="10" r="1.6"></circle>
+        <path d="m5.5 17 4.3-4.2 3.1 2.9 2.3-2.2 3.3 3.5"></path>
+      </symbol>
+      <symbol id="i-keyboard" viewBox="0 0 24 24">
+        <rect x="3" y="6" width="18" height="12" rx="2"></rect>
+        <path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M6.5 13.5h.01M10 13.5h.01M13.5 13.5h.01M17 13.5h.01M8 17h8"></path>
+      </symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24">
+        <path d="M12 3.5 21 20H3L12 3.5Z"></path>
+        <path d="M12 9v5M12 17.2v.1"></path>
+      </symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24">
+        <path d="M2.8 12S6.4 5.8 12 5.8 21.2 12 21.2 12 17.6 18.2 12 18.2 2.8 12 2.8 12Z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="M12 3 20 6v5.5c0 4.6-3.4 7.8-8 9.5-4.6-1.7-8-4.9-8-9.5V6l8-3Z"></path>
+        <path d="m8.7 12 2.2 2.2 4.4-4.5"></path>
+      </symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24">
+        <path d="M20 4c-8.5 0-14 4.2-14 10 0 3 2.5 6 6 6 6 0 8-6.5 8-16Z"></path>
+        <path d="M4 21c2.5-5.5 6.4-9.1 12-12"></path>
+      </symbol>
+      <symbol id="i-tree" viewBox="0 0 24 24">
+        <path d="M12 3 6.8 10h2.7L5 16.5h6v4h2v-4h6L14.5 10h2.7L12 3Z"></path>
+      </symbol>
+      <symbol id="i-coins" viewBox="0 0 24 24">
+        <ellipse cx="9" cy="7" rx="5.5" ry="2.8"></ellipse>
+        <path d="M3.5 7v4.5c0 1.5 2.5 2.8 5.5 2.8s5.5-1.3 5.5-2.8V7"></path>
+        <path d="M14.5 10.2c3 .2 5.5 1.4 5.5 2.8V18c0 1.5-2.5 2.8-5.5 2.8S9 19.5 9 18v-3"></path>
+      </symbol>
+      <symbol id="i-route" viewBox="0 0 24 24">
+        <circle cx="5" cy="18" r="2.2"></circle>
+        <circle cx="19" cy="6" r="2.2"></circle>
+        <path d="M7.2 18h4.2a3.5 3.5 0 0 0 3.5-3.5v-5A3.5 3.5 0 0 1 18.4 6"></path>
+      </symbol>
+      <symbol id="i-verified" viewBox="0 0 24 24">
+        <path d="m12 2.8 2.5 1.8 3-.2 1 2.9 2.6 1.6-1 2.9 1 3-2.6 1.5-1 3-3-.2L12 21.2l-2.5-1.8-3 .2-1-2.9-2.6-1.6 1-2.9-1-3 2.6-1.5 1-3 3 .2L12 2.8Z"></path>
+        <path d="m8.5 12.2 2.3 2.3 4.6-4.6"></path>
+      </symbol>
+      <symbol id="i-undo" viewBox="0 0 24 24">
+        <path d="M4 8v5h5"></path>
+        <path d="M5.4 13a7.5 7.5 0 1 0 1.2-5.9L4 9.8"></path>
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24">
+        <path d="M4 12h15M14 7l5 5-5 5"></path>
+      </symbol>
+      <symbol id="i-info" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8.8"></circle>
+        <path d="M12 11v5M12 7.8v.1"></path>
+      </symbol>
+      <symbol id="i-receipt" viewBox="0 0 24 24">
+        <path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"></path>
+        <path d="M9 8h6M9 12h6M9 16h3"></path>
+      </symbol>
+      <symbol id="i-building" viewBox="0 0 24 24">
+        <path d="M4 21V8l6-3v16M14 21V10l6-2v13M2 21h20"></path>
+        <path d="M7 9v.1M7 12v.1M7 15v.1M7 18v.1M17 12v.1M17 15v.1M17 18v.1"></path>
+      </symbol>
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="3.2"></circle>
+        <path d="M3.5 20v-1.8A4.7 4.7 0 0 1 8.2 13.5h1.6a4.7 4.7 0 0 1 4.7 4.7V20"></path>
+        <path d="M16 5.5a3.3 3.3 0 0 1 0 6.4M17 14a4.4 4.4 0 0 1 3.5 4.3V20"></path>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="#despacho" data-view-link="dashboard">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40">
+            <rect width="40" height="40" rx="10" fill="#0b2238"></rect>
+            <path d="M9 28V13.5l7 8 7-8V28" fill="none" stroke="#c7d9c2" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="9" cy="13.5" r="2.4" fill="#c7d9c2"></circle>
+            <circle cx="30" cy="15" r="2.4" fill="#70a28a"></circle>
+            <path d="M23 21.5c2.5 0 4.4-.9 5.7-3" fill="none" stroke="#70a28a" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </span>
+        <span class="brand-type">
+          <strong>MiMaipÃº</strong>
+          <small>Ecosistema Nervioso Urbano</small>
+        </span>
+      </a>
+
+      <nav class="view-nav" aria-label="Vistas principales">
+        <a class="view-link is-active" href="#despacho" data-view-link="dashboard" aria-current="page">
+          <svg class="icon" aria-hidden="true"><use href="#i-grid"></use></svg>
+          <span>Despacho municipal</span>
+        </a>
+        <a class="view-link" href="#ciudadano" data-view-link="citizen">
+          <svg class="icon" aria-hidden="true"><use href="#i-chat"></use></svg>
+          <span>Canal ciudadano</span>
+        </a>
+      </nav>
+
+      <div class="header-status">
+        <span class="demo-tag">Demo</span>
+        <div class="live-time" aria-label="Estado del sistema y hora simulada de la maqueta">
+          <span class="live-dot" aria-hidden="true"></span>
+          <span class="live-label">En vivo</span>
+          <time id="live-clock" datetime="09:42" title="Hora simulada para esta maqueta">09:42</time>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+    <section class="view" id="view-dashboard" data-view="dashboard" aria-labelledby="dashboard-title">
+      <div class="workspace">
+        <header class="page-head">
+          <div class="page-intro">
+            <p class="eyebrow">Centro de despacho Â· MaipÃº</p>
+            <h1 id="dashboard-title" tabindex="-1">Despacho urbano de MaipÃº.</h1>
+            <p class="page-sub">Rutas, cuadrillas y reportes vecinales en una sola lectura.</p>
+          </div>
+          <div class="page-actions">
+            <div class="sync-state">
+              <span class="sync-dot" aria-hidden="true"></span>
+              <span>Actualizado hace <span id="sync-seconds">12</span> s</span>
+            </div>
+            <button class="button button-secondary button-small" type="button" id="refresh-dashboard">
+              <svg class="icon" aria-hidden="true"><use href="#i-refresh"></use></svg>
+              <span>Actualizar</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="impact-panel" aria-labelledby="impact-title">
+          <div class="impact-head">
+            <div>
+              <p class="eyebrow eyebrow-light">Impacto del turno</p>
+              <h2 id="impact-title">Balance operacional</h2>
+            </div>
+            <div class="impact-live">
+              <span class="live-dot live-dot-light" aria-hidden="true"></span>
+              <span>Turno maÃ±ana Â· 6 cuadrillas</span>
+            </div>
+          </div>
+          <dl class="impact-metrics">
+            <div class="impact-metric">
+              <dt>DiÃ©sel ahorrado</dt>
+              <dd>18,4 <span>L</span>
+                <p>7 rutas agrupadas este turno</p>
+              </dd>
+            </div>
+            <div class="impact-metric impact-metric-eco">
+              <dt>COâ‚‚ evitado</dt>
+              <dd>48,2 <span>kg</span>
+                <p class="tree-note">
+                  <svg class="icon" aria-hidden="true"><use href="#i-tree"></use></svg>
+                  Equivale a 2,3 Ã¡rboles absorbiendo durante un aÃ±o
+                </p>
+              </dd>
+            </div>
+            <div class="impact-metric impact-metric-cost">
+              <dt>Costo total del turno Â· CLP</dt>
+              <dd>$1,84 <span>M</span>
+                <div class="cost-breakdown" aria-label="OperaciÃ³n 1,39 millones de pesos; mantenciÃ³n 450 mil pesos">
+                  <span class="cost-operations"><i aria-hidden="true"></i>OperaciÃ³n $1,39 M</span>
+                  <span class="cost-maintenance"><i aria-hidden="true"></i>MantenciÃ³n $450 mil</span>
+                </div>
+              </dd>
+            </div>
+            <div class="impact-metric">
+              <dt>Respuesta promedio</dt>
+              <dd>38 <span>min</span>
+                <p>6 min menos que el turno anterior</p>
+              </dd>
+            </div>
+          </dl>
+          <p class="impact-data-note">Indicadores simulados con datos de demostraciÃ³n.</p>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel map-panel" aria-labelledby="map-title">
+            <div class="panel-head map-head">
+              <div>
+                <h2 id="map-title">Mapa operativo</h2>
+                <p class="panel-meta">MaipÃº Â· 6 macrozonas. Selecciona una zona o un caso.</p>
+              </div>
+            </div>
+
+            <div class="map-toolbar">
+              <div class="segmented" role="group" aria-label="Vista del mapa">
+                <button class="segment is-active" type="button" data-map-mode="status" aria-pressed="true">SemÃ¡foro</button>
+                <button class="segment" type="button" data-map-mode="incidents" aria-pressed="false">Incidentes</button>
+              </div>
+              <div class="layer-filters" role="group" aria-label="Filtrar por capa">
+                <span class="filter-label">Capas</span>
+                <button class="layer-chip is-active" type="button" data-layer="aseo" aria-pressed="true">
+                  <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
+                  <span>Aseo</span><span class="chip-count">2</span>
+                </button>
+                <button class="layer-chip is-active" type="button" data-layer="bacheo" aria-pressed="true">
+                  <svg class="icon" aria-hidden="true"><use href="#i-road"></use></svg>
+                  <span>Bacheo</span><span class="chip-count">2</span>
+                </button>
+                <button class="layer-chip is-active" type="button" data-layer="alumbrado" aria-pressed="true">
+                  <svg class="icon" aria-hidden="true"><use href="#i-lamp"></use></svg>
+                  <span>Alumbrado</span><span class="chip-count">2</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="map-stage" id="map-stage" data-map-mode="status">
+              <svg class="map-art" viewBox="0 0 920 520" preserveAspectRatio="none" role="img" aria-label="Mapa esquemÃ¡tico de MaipÃº con macrozonas, calles principales y equipos en terreno">
+                <defs>
+                  <clipPath id="commune-clip">
+                    <path d="M94 132 282 56 548 48 774 112 849 250 794 386 624 462 382 480 188 416 92 292Z"></path>
+                  </clipPath>
+                  <filter id="map-soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#607068" flood-opacity=".14"></feDropShadow>
+                  </filter>
+                </defs>
+
+                <rect width="920" height="520" fill="#e7e2d7"></rect>
+                <path d="M0 0h920v520H0z" fill="#ece8de"></path>
+
+                <g clip-path="url(#commune-clip)">
+                  <path class="zone-fill zone-fill-rinconada" data-zone-shape="rinconada" d="M92 132 282 56 356 144 304 262 172 296 92 292Z"></path>
+                  <path class="zone-fill zone-fill-satelite" data-zone-shape="ciudad-satelite" d="M282 56 548 48 774 112 764 226 536 250 356 144Z"></path>
+                  <path class="zone-fill zone-fill-pajaritos" data-zone-shape="pajaritos" d="M304 262 536 250 764 226 780 318 610 346 330 326 172 296Z"></path>
+                  <path class="zone-fill zone-fill-centro" data-zone-shape="centro" d="M172 296 330 326 610 346 566 404 382 480 188 416 92 292Z"></path>
+                  <path class="zone-fill zone-fill-farfana" data-zone-shape="farfana" d="M188 416 382 480 370 494 160 442 92 336 100 302 188 416Z"></path>
+                  <path class="zone-fill zone-fill-malloco" data-zone-shape="malloco" d="M610 346 780 318 794 386 624 462 566 404Z"></path>
+
+                  <g class="map-parks">
+                    <path d="M614 164c26-22 71-15 84 13s-11 55-44 55-63-41-40-68Z"></path>
+                    <path d="M379 372c12-19 43-16 54 2 10 19-3 42-28 42-23 0-38-25-26-44Z"></path>
+                    <path d="M232 196c15-14 41-7 44 11 4 19-15 34-33 29-17-5-23-29-11-40Z"></path>
+                  </g>
+
+                  <g class="map-water">
+                    <path d="M94 180C208 150 300 173 398 166s180-59 289-44c51 7 100 23 158 9"></path>
+                  </g>
+
+                  <g class="map-minor-streets">
+                    <path d="M150 92c70 44 100 76 124 138"></path>
+                    <path d="M238 102c36 55 46 105 38 168"></path>
+                    <path d="M428 88c-2 44 2 83 22 122"></path>
+                    <path d="M594 94c-22 55-20 102-6 148"></path>
+                    <path d="M704 118c-48 45-70 92-78 144"></path>
+                    <path d="M154 232c77 16 154 25 231 31 96 8 196 5 306-12"></path>
+                    <path d="M232 350c94-7 184 3 278 22 58 12 112 24 188 23"></path>
+                    <path d="M318 112c18 40 20 88 32 144 13 66 31 131 42 215"></path>
+                    <path d="M488 92c-7 44 5 91 10 138 7 64-10 141 17 232"></path>
+                    <path d="M648 109c-5 48 5 91 15 139 10 53 13 105 9 166"></path>
+                    <path d="M132 280c79 35 129 71 186 120"></path>
+                    <path d="M680 275c-49 32-70 86-81 139"></path>
+                  </g>
+
+                  <g class="map-major-streets">
+                    <path d="M63 202c129 18 239 16 382 22 129 5 253 22 421-4"></path>
+                    <path d="M369 48c-15 92-10 195 14 290 19 77 25 133 36 196"></path>
+                    <path d="M167 322c85 17 169 23 267 23 137 0 219-4 328-20"></path>
+                    <path d="M696 122c-50 65-77 139-100 237-11 46-25 105-42 162"></path>
+                    <path d="M174 68c45 81 91 142 144 193 62 59 147 104 260 170"></path>
+                    <path d="M129 394c95 23 175 29 280 31 133 2 235-18 347-17"></path>
+                  </g>
+
+                  <path class="map-boundary" d="M94 132 282 56 548 48 774 112 849 250 794 386 624 462 382 480 188 416 92 292Z"></path>
+                </g>
+
+              </svg>
+
+              <div class="street-labels" aria-hidden="true">
+                <span class="street-label street-pajaritos">Av. Pajaritos</span>
+                <span class="street-label street-abril">Av. 5 de Abril</span>
+                <span class="street-label street-rinconada">Camino a Rinconada</span>
+                <span class="street-label street-melipilla">Camino a Melipilla</span>
+                <span class="street-label street-llona">Av. Alberto Llona</span>
+                <span class="street-label street-los-pinos">Av. Los Pinos</span>
+              </div>
+
+              <div class="zones-layer" id="zones-layer"></div>
+              <div class="pins-layer" id="pins-layer"></div>
+              <button class="map-zone-filter" id="map-zone-filter" type="button" hidden></button>
+              <div class="map-popover" id="map-popover" hidden></div>
+
+              <div class="map-summary">
+                <span class="map-summary-dot" aria-hidden="true"></span>
+                <span><strong>6 casos activos</strong> en 6 macrozonas</span>
+              </div>
+            </div>
+
+            <div class="risk-filter-wrap">
+              <div class="risk-filter-head">
+                <p>Riesgo por macrozona</p>
+                <button class="text-button" type="button" id="reset-risk" aria-pressed="true">Ver todo</button>
+              </div>
+              <div class="risk-legend" role="group" aria-label="Filtrar por estado de riesgo">
+                <button class="risk-filter" type="button" data-risk="red" aria-pressed="false">
+                  <span class="risk-icon risk-icon-red"><svg class="icon" aria-hidden="true"><use href="#i-alert"></use></svg></span>
+                  <span class="risk-copy"><strong>Rojo Â· Riesgo alto</strong><small>Pasaje oscuro o riesgo de caÃ­da</small></span>
+                  <span class="risk-count">2</span>
+                </button>
+                <button class="risk-filter" type="button" data-risk="yellow" aria-pressed="false">
+                  <span class="risk-icon risk-icon-yellow"><svg class="icon" aria-hidden="true"><use href="#i-eye"></use></svg></span>
+                  <span class="risk-copy"><strong>Amarillo Â· Moderado</strong><small>Atender durante las prÃ³ximas horas</small></span>
+                  <span class="risk-count">2</span>
+                </button>
+                <button class="risk-filter" type="button" data-risk="green" aria-pressed="false">
+                  <span class="risk-icon risk-icon-green"><svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+                  <span class="risk-copy"><strong>Verde Â· Preventivo</strong><small>MantenciÃ³n programada</small></span>
+                  <span class="risk-count">2</span>
+                </button>
+              </div>
+            </div>
+            <div class="map-foot">
+              <p>Mapa esquemÃ¡tico. El semÃ¡foro combina reportes, historial y luminosidad de cada sector. Datos simulados.</p>
+              <span>Corte <time id="map-cut">09:42</time></span>
+            </div>
+          </section>
+
+          <aside class="panel tickets-panel" aria-labelledby="tickets-title">
+            <div class="panel-head tickets-head">
+              <div>
+                <h2 id="tickets-title" tabindex="-1">Tickets priorizados</h2>
+                <p class="panel-meta">Urgencia es el plazo. Severidad es el impacto.</p>
+              </div>
+              <div class="tickets-head-meta">
+                <span class="open-count"><strong id="ticket-count">6</strong> abiertos</span>
+                <button class="text-button ticket-clear" type="button" id="clear-zone" hidden>Quitar filtro de zona</button>
+              </div>
+            </div>
+            <div class="ticket-list" id="ticket-list" aria-live="polite"></div>
+            <div class="bulk-bar" id="bulk-bar">
+              <div class="bulk-copy">
+                <strong id="bulk-title">Selecciona 2 o mÃ¡s casos</strong>
+                <span id="bulk-help">Una cuadrilla multifuncional atiende fallas cercanas en una sola ruta.</span>
+              </div>
+              <button class="button button-primary" type="button" id="group-dispatch" disabled>
+                <svg class="icon" aria-hidden="true"><use href="#i-route"></use></svg>
+                <span>Despacho agrupado</span>
+              </button>
+            </div>
+          </aside>
+        </div>
+
+        <section class="panel fleet-panel" aria-labelledby="fleet-title">
+          <div class="panel-head fleet-head">
+            <div>
+              <h2 id="fleet-title">Flota sensorizada</h2>
+              <p class="panel-meta">CÃ¡mara IA, vibraciÃ³n y estado de conexiÃ³n en terreno.</p>
+            </div>
+            <div class="fleet-status">
+              <span><span class="status-dot status-dot-green" aria-hidden="true"></span>3 en lÃ­nea</span>
+              <span><span class="status-dot status-dot-yellow" aria-hidden="true"></span>1 offline</span>
+              <span class="fleet-updated">Corte 09:42:08</span>
+            </div>
+          </div>
+          <div class="fleet-grid" id="fleet-grid"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="view" id="view-citizen" data-view="citizen" aria-labelledby="citizen-title" hidden>
+      <div class="citizen-page">
+        <header class="citizen-intro">
+          <div>
+            <p class="eyebrow">Canal ciudadano Â· WhatsApp MiMaipÃº</p>
+            <h1 id="citizen-title" tabindex="-1">Reportar en MaipÃº, sin vueltas.</h1>
+            <p class="page-sub">Nota de voz, foto o texto. MIMA recibe el reporte y coordina la visita.</p>
+          </div>
+          <div class="citizen-live">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>MIMA responde en menos de 1 min</span>
+          </div>
+        </header>
+
+        <div class="citizen-layout">
+          <aside class="citizen-aside" aria-label="CÃ³mo funciona el canal ciudadano">
+            <div class="aside-story">
+              <p class="kicker kicker-light">Un canal para el barrio</p>
+              <h2>Habla. Nosotros coordinamos.</h2>
+              <p>Sin formularios largos ni lenguaje tÃ©cnico. CuÃ©ntanos lo que ves y revisa el avance desde el mismo chat.</p>
+            </div>
+
+            <div class="citizen-promise">
+              <span class="promise-icon" aria-hidden="true">
+                <svg class="icon"><use href="#i-shield"></use></svg>
+              </span>
+              <div>
+                <strong>Este canal es ciudadano, no fiscalizador.</strong>
+                <p>Tu reporte ayuda a priorizar mejoras. No genera multas, partes ni reclamos contra vecinos.</p>
+              </div>
+            </div>
+
+            <nav class="stage-nav" aria-label="Recorrido de la simulaciÃ³n">
+              <p class="stage-nav-title">Recorrido del reporte</p>
+              <button class="stage-step is-active" type="button" data-stage="report" aria-current="step">
+                <span class="stage-index">01</span>
+                <span><strong>Reporta</strong><small>Habla, escribe o envÃ­a una foto</small></span>
+              </button>
+              <button class="stage-step" type="button" data-stage="confirm">
+                <span class="stage-index">02</span>
+                <span><strong>Confirma</strong><small>Folio, estado y llegada</small></span>
+              </button>
+              <button class="stage-step" type="button" data-stage="close">
+                <span class="stage-index">03</span>
+                <span><strong>Revisa el cierre</strong><small>Antes y despuÃ©s, huella y puntos</small></span>
+              </button>
+            </nav>
+
+            <p class="prototype-note">Maqueta interactiva: no envÃ­a mensajes ni usa tu micrÃ³fono real. Las cifras, folios y estados son de demostraciÃ³n.</p>
+          </aside>
+
+          <div class="chat-column">
+            <div class="mobile-stages" role="group" aria-label="Recorrido de la simulaciÃ³n">
+              <button class="stage-step-mobile is-active" type="button" data-stage="report" aria-current="step">Reporta</button>
+              <button class="stage-step-mobile" type="button" data-stage="confirm">Confirma</button>
+              <button class="stage-step-mobile" type="button" data-stage="close">Cierre</button>
+            </div>
+
+            <section class="chat-shell" aria-label="Simulador de chat MiMaipÃº">
+              <header class="chat-header">
+                <div class="chat-identity">
+                  <span class="mima-avatar" aria-hidden="true">
+                    <svg viewBox="0 0 40 40">
+                      <rect width="40" height="40" rx="13" fill="#c7d9c2"></rect>
+                      <path d="M10 28V14l6.5 7.3L23 14v14" fill="none" stroke="#0b2238" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                      <path d="M26 23.5c2.1 0 3.7-1 4.7-2.8" fill="none" stroke="#0b2238" stroke-width="1.8" stroke-linecap="round"></path>
+                    </svg>
+                  </span>
+                  <div class="chat-title">
+                    <div><strong>MiMaipÃº</strong><svg class="verified-icon" role="img" aria-label="Canal verificado"><use href="#i-verified"></use></svg></div>
+                    <span>MIMA Â· asistente municipal</span>
+                  </div>
+                </div>
+                <button class="chat-reset" type="button" id="reset-chat">
+                  <svg class="icon" aria-hidden="true"><use href="#i-undo"></use></svg>
+                  <span>Reiniciar</span>
+                </button>
+              </header>
+
+              <div class="chat-fiscal-note">
+                <svg class="icon" aria-hidden="true"><use href="#i-info"></use></svg>
+                <p><strong>Canal ciudadano, no fiscalizador.</strong> Tu reporte no genera multas ni partes.</p>
+              </div>
+
+              <div class="chat-log" id="chat-log" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+              <div class="chat-composer" id="chat-composer">
+                <button class="composer-icon" type="button" id="attach-button" aria-label="Adjuntar una foto">
+                  <svg class="icon" aria-hidden="true"><use href="#i-photo"></use></svg>
+                </button>
+                <label class="sr-only" for="chat-input">Escribe tu mensaje para MiMaipÃº</label>
+                <input class="chat-input" id="chat-input" type="text" maxlength="280" autocomplete="off" placeholder="Escribe o habla">
+                <button class="composer-mic" type="button" id="composer-mic" aria-label="Grabar una nota de voz">
+                  <svg class="icon" aria-hidden="true"><use href="#i-mic"></use></svg>
+                </button>
+                <button class="composer-send" type="button" id="composer-send" aria-label="Enviar mensaje">
+                  <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg>
+                </button>
+                <input type="file" id="photo-input" accept="image/*" hidden>
+              </div>
+
+              <div class="recording-bar" id="recording-bar" hidden>
+                <button class="recording-cancel" type="button" id="cancel-recording">Cancelar</button>
+                <span class="recording-state"><span class="recording-dot" aria-hidden="true"></span>Grabando nota de voz</span>
+                <span class="waveform" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                <time id="recording-time">0:00</time>
+                <button class="button button-accent button-small" type="button" id="send-recording">Enviar audio</button>
+              </div>
+            </section>
+            <p class="chat-footnote">Prototipo visual con datos simulados. No envÃ­a mensajes ni usa tu micrÃ³fono. Las calles y sectores son reales; folios, tiempos y montos no.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <strong>MiMaipÃº</strong>
+        <span>Ecosistema Nervioso Urbano Â· DirecciÃ³n de Operaciones</span>
+      </div>
+      <p>Mockup de demostraciÃ³n. Las calles y sectores son reales; reportes, cifras, horas y estados son ficticios.</p>
+      <span class="footer-version">v0.9 Â· MaipÃº, Chile</span>
+    </div>
+  </footer>
+
+  <dialog class="app-dialog" id="dispatch-dialog" aria-labelledby="dispatch-title">
+    <div class="dialog-header">
+      <div>
+        <p class="kicker">Una ruta, varias fallas</p>
+        <h2 id="dispatch-title">Despacho agrupado</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-dialog aria-label="Cerrar despacho agrupado">
+        <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+    <p class="dialog-lede">Asigna una cuadrilla multifuncional a los casos seleccionados y evita viajes repetidos por el mismo sector.</p>
+    <div class="dialog-selected" id="dispatch-selected"></div>
+    <div class="dispatch-summary">
+      <div><span>Distancia estimada</span><strong>1,8 km</strong></div>
+      <div><span>Tiempo de ruta</span><strong>31 min</strong></div>
+      <div><span>Ahorro proyectado</span><strong>2,4 L diÃ©sel</strong></div>
+    </div>
+    <label class="field-label" for="crew-select">Cuadrilla asignada</label>
+    <select class="select" id="crew-select">
+      <option value="M-04">Cuadrilla M-04 Â· mixta, bacheo y alumbrado</option>
+      <option value="M-02">Cuadrilla M-02 Â· mixta, aseo y bacheo</option>
+      <option value="M-06">Cuadrilla M-06 Â· alumbrado y seÃ±alizaciÃ³n</option>
+    </select>
+    <p class="dialog-note"><svg class="icon" aria-hidden="true"><use href="#i-leaf"></use></svg> Reduce 6,1 kg de COâ‚‚e frente a despachos separados.</p>
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" data-close-dialog>Cancelar</button>
+      <button class="button button-primary" type="button" id="confirm-dispatch">Asignar cuadrilla</button>
+    </div>
+  </dialog>
+
+  <dialog class="app-dialog" id="fleet-dialog" aria-labelledby="fleet-dialog-title">
+    <div class="dialog-header">
+      <div>
+        <p class="kicker">Detalle de telemetrÃ­a</p>
+        <h2 id="fleet-dialog-title">VehÃ­culo</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-dialog aria-label="Cerrar detalle de flota">
+        <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+    <div id="fleet-dialog-content"></div>
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" data-close-dialog>Cerrar</button>
+      <button class="button button-primary" type="button" id="fleet-map-button">Ver en el mapa</button>
+    </div>
+  </dialog>
+
+  <dialog class="app-dialog" id="reschedule-dialog" aria-labelledby="reschedule-title">
+    <div class="dialog-header">
+      <div>
+        <p class="kicker">Visita de cuadrilla</p>
+        <h2 id="reschedule-title">Reprogramar visita</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-dialog aria-label="Cerrar reprogramaciÃ³n">
+        <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+    <p class="dialog-lede">Elige una ventana de atenciÃ³n. La cuadrilla trabajarÃ¡ en la vÃ­a pÃºblica y no necesita que estÃ©s en casa.</p>
+    <fieldset class="option-list">
+      <legend class="sr-only">Nueva ventana de atenciÃ³n</legend>
+      <label class="radio-card">
+        <input type="radio" name="visit-window" value="Hoy, 15:00 a 17:00" checked>
+        <span class="radio-mark" aria-hidden="true"></span>
+        <span><strong>Hoy, 15:00 a 17:00</strong><small>Misma cuadrilla M-04</small></span>
+      </label>
+      <label class="radio-card">
+        <input type="radio" name="visit-window" value="MaÃ±ana, 09:00 a 11:00">
+        <span class="radio-mark" aria-hidden="true"></span>
+        <span><strong>MaÃ±ana, 09:00 a 11:00</strong><small>Primera ventana de la maÃ±ana</small></span>
+      </label>
+      <label class="radio-card">
+        <input type="radio" name="visit-window" value="MaÃ±ana, 12:00 a 14:00">
+        <span class="radio-mark" aria-hidden="true"></span>
+        <span><strong>MaÃ±ana, 12:00 a 14:00</strong><small>Cuadrilla M-02</small></span>
+      </label>
+    </fieldset>
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" data-close-dialog>Cancelar</button>
+      <button class="button button-primary" type="button" id="confirm-reschedule">Confirmar nueva hora</button>
+    </div>
+  </dialog>
+
+  <dialog class="app-dialog" id="location-dialog" aria-labelledby="location-title">
+    <div class="dialog-header">
+      <div>
+        <p class="kicker">UbicaciÃ³n del reporte</p>
+        <h2 id="location-title">Corregir direcciÃ³n</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-dialog aria-label="Cerrar correcciÃ³n de direcciÃ³n">
+        <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+    <p class="dialog-lede">Elige una referencia cercana. Luego podrÃ¡s confirmar el reporte.</p>
+    <fieldset class="option-list">
+      <legend class="sr-only">DirecciÃ³n del reporte</legend>
+      <label class="radio-card">
+        <input type="radio" name="report-location" value="Av. Pajaritos con Av. Los Pinos" data-zone="Pajaritos" checked>
+        <span class="radio-mark" aria-hidden="true"></span>
+        <span><strong>Av. Pajaritos con Av. Los Pinos</strong><small>Pajaritos</small></span>
+      </label>
+      <label class="radio-card">
+        <input type="radio" name="report-location" value="Pasaje Los Aromos, Rinconada" data-zone="Rinconada">
+        <span class="radio-mark" aria-hidden="true"></span>
+        <span><strong>Pasaje Los Aromos</strong><small>Rinconada</small></span>
+      </label>
+      <label class="radio-card">
+        <input type="radio" name="report-location" value="Av. 5 de Abril con Portales" data-zone="Centro">
+        <span class="radio-mark" aria-hidden="true"></span>
+        <span><strong>Av. 5 de Abril con Portales</strong><small>Centro</small></span>
+      </label>
+    </fieldset>
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" data-close-dialog>Cancelar</button>
+      <button class="button button-primary" type="button" id="confirm-location">Usar esta ubicaciÃ³n</button>
+    </div>
+  </dialog>
+
+  <dialog class="app-dialog" id="rewards-dialog" aria-labelledby="rewards-title">
+    <div class="dialog-header">
+      <div>
+        <p class="kicker">Puntos MiMaipÃº</p>
+        <h2 id="rewards-title">Tus recompensas</h2>
+      </div>
+      <button class="icon-button" type="button" data-close-dialog aria-label="Cerrar recompensas">
+        <svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+    <div class="rewards-balance">
+      <span>Saldo disponible</span>
+      <strong><span id="rewards-points">340</span> pts</strong>
+    </div>
+    <p class="dialog-lede">Canjea tus puntos por beneficios municipales de demostraciÃ³n.</p>
+    <div class="reward-list" id="reward-list"></div>
+    <p class="dialog-note">Los canjes de esta maqueta no generan reservas ni descuentos reales.</p>
+    <div class="dialog-actions">
+      <button class="button button-secondary" type="button" data-close-dialog>Cerrar</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+    <span class="toast-icon" aria-hidden="true"><svg class="icon"><use href="#i-check"></use></svg></span>
+    <span id="toast-message"></span>
+  </div>
+</body>
+</html>
+
