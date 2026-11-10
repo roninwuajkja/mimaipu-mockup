@@ -1,18 +1,20 @@
 # MiMaipú · Ecosistema Nervioso Urbano
 
-Mockup web interactivo de un centro de despacho municipal y de un canal ciudadano tipo WhatsApp para Maipú. Funciona sin instalaciones ni backend.
+Mockup web interactivo de un centro de despacho municipal y de un canal ciudadano tipo WhatsApp para Maipú. Funciona sin instalaciones ni backend, con un mapa real de OpenStreetMap.
 
 **Demo en línea:** [https://roninwuajkja.github.io/mimaipu-mockup/](https://roninwuajkja.github.io/mimaipu-mockup/)
 
 ## Abrir
 
-Abre `index.html` directamente en Chrome, Edge o Firefox. También puedes servirlo como archivo estático si tu navegador restringe recursos locales:
+Abre `index.html` directamente en Chrome, Edge o Firefox. También puedes servirlo como archivo estático:
 
 ```powershell
 python -m http.server 8000
 ```
 
 Luego visita `http://localhost:8000`.
+
+El mapa base necesita conexión a Internet para descargar las teselas de OpenStreetMap. MapLibre GL JS está incluido localmente en `assets/vendor/maplibre`.
 
 ## Vistas
 
@@ -36,10 +38,10 @@ La navegación utiliza `#despacho` y `#ciudadano`, por lo que funciona el botón
 - **Paleta:** azul marino institucional, papel cálido, blanco y salvia. El rojo, ámbar y verde del semáforo se reservan para los datos de riesgo y siempre van acompañados de texto e íconos, nunca solo color.
 - **Tipografía:** Archivo para titulares y cifras de operación; Public Sans para lectura de interfaz y chat por su alta legibilidad. Ambas se cargan localmente desde `assets/fonts`.
 - **Lectura:** chat a 16 px, botones de al menos 44 px y mensajes de estado redundantes (color + palabra + ícono).
-- **Mapa:** geografía esquemática de macrozonas operativas. Las calles y sectores son referencias reales de Maipú; la geometría es ilustrativa.
+- **Mapa:** base real de OpenStreetMap navegable con MapLibre GL JS, zoom, arrastre y marcadores georreferenciados. Las macrozonas son áreas operativas circulares de demostración, no límites administrativos oficiales.
 - **Movimiento:** transiciones breves para cambios de estado y mensajes. Respeta `prefers-reduced-motion`.
 - **Accesibilidad:** navegación por teclado, foco visible, diálogos nativos cerrables con Escape, etiquetas accesibles, contraste WCAG AA, regiones activas y nombres de estado significativos.
-- **Sin dependencias externas:** fuentes e íconos son locales. El documento funciona incluso abierto como archivo.
+- **Dependencias:** fuentes, estilos, íconos y librería de mapas son locales. Solo las teselas del mapa se cargan desde OpenStreetMap y requieren conexión.
 
 ## Datos y límites
 
@@ -57,7 +59,8 @@ styles.css                       sistema visual, mapa y diseño responsive
 app.js                           datos de demostración e interacciones
 assets/favicon.svg               favicon
 assets/fonts/                    fuentes locales y sus licencias
+assets/vendor/maplibre/          MapLibre GL JS, CSS y licencia BSD
 README.md
 ```
 
-Fuentes: Archivo y Public Sans, SIL Open Font License. Las licencias están incluidas en `assets/fonts`.
+Fuentes: Archivo y Public Sans, SIL Open Font License. MapLibre GL JS, licencia BSD 3-Clause. Datos cartográficos © OpenStreetMap contributors, disponibles bajo la Open Database License.

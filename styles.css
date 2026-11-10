@@ -889,199 +889,129 @@ h3 {
   background: #e9e5db;
 }
 
-.map-art {
+.maipu-map {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background: #e9e5db;
 }
 
-.zone-fill {
-  stroke: rgba(255, 254, 250, 0.92);
-  stroke-width: 2.5;
-  transition: opacity 260ms ease, fill 260ms ease;
+.maipu-map .maplibregl-canvas {
+  outline: none;
 }
 
-.zone-fill-rinconada {
-  fill: #a84639;
-  fill-opacity: 0.2;
+.maipu-map .maplibregl-ctrl-bottom-right {
+  right: 10px;
+  bottom: 10px;
 }
 
-.zone-fill-satelite {
-  fill: #b88327;
-  fill-opacity: 0.19;
+.maipu-map .maplibregl-ctrl-group {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  background: var(--surface);
+  box-shadow: none;
 }
 
-.zone-fill-pajaritos {
-  fill: #a84639;
-  fill-opacity: 0.18;
+.maipu-map .maplibregl-ctrl-group button {
+  width: 44px;
+  height: 44px;
+  background: transparent;
 }
 
-.zone-fill-centro {
-  fill: #b88327;
-  fill-opacity: 0.18;
+.maipu-map .maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--line);
 }
 
-.zone-fill-farfana {
-  fill: #2e7659;
-  fill-opacity: 0.15;
-}
-
-.zone-fill-malloco {
-  fill: #2e7659;
-  fill-opacity: 0.13;
-}
-
-.zone-fill.is-filtered {
-  opacity: 0.2;
-}
-
-.zone-fill.is-selected {
-  stroke: var(--ink);
-  stroke-width: 3;
-  filter: drop-shadow(0 2px 3px rgba(12, 34, 56, 0.12));
-}
-
-.map-stage[data-map-mode="incidents"] .zone-fill {
-  fill-opacity: 0.08;
-}
-
-.map-stage[data-map-mode="incidents"] .zone-fill.is-selected {
-  fill-opacity: 0.18;
-}
-
-.map-stage[data-map-mode="incidents"] .zone-label {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.map-parks {
-  fill: #b9cda6;
-  opacity: 0.8;
-}
-
-.map-water path {
-  fill: none;
-  stroke: #9bb9b5;
-  stroke-width: 5;
-  stroke-linecap: round;
-  opacity: 0.75;
-}
-
-.map-minor-streets path {
-  fill: none;
-  stroke: rgba(255, 254, 250, 0.78);
-  stroke-width: 3;
-  stroke-linecap: round;
-}
-
-.map-major-streets path {
-  fill: none;
-  stroke: rgba(255, 254, 250, 0.98);
-  stroke-width: 6.5;
-  stroke-linecap: round;
-}
-
-.map-boundary {
-  fill: none;
-  stroke: rgba(255, 254, 250, 0.9);
-  stroke-width: 3;
-}
-
-.street-labels {
+.map-loading {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #e9e5db;
+  color: var(--ink);
+  font-size: 0.75rem;
 }
 
-.street-label {
+.map-loading .spinner {
+  width: 17px;
+  height: 17px;
+  border-color: #c4c8bb;
+  border-top-color: var(--green);
+}
+
+.map-fallback {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 8;
+  width: min(330px, calc(100% - 36px));
+  padding: 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
   transform: translate(-50%, -50%);
-  color: #4f5c55;
-  font-size: 0.61rem;
-  font-weight: 700;
-  letter-spacing: 0.015em;
-  line-height: 1;
-  text-shadow: 0 1px 0 rgba(255, 254, 250, 0.9), 0 0 6px rgba(255, 254, 250, 0.9);
 }
 
-.street-pajaritos {
-  top: 38%;
-  left: 43%;
-  transform: translate(-50%, -50%) rotate(-6deg);
+.map-fallback strong {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 1rem;
 }
 
-.street-abril {
-  top: 58%;
-  left: 46%;
-  transform: translate(-50%, -50%) rotate(82deg);
+.map-fallback p {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.45;
 }
 
-.street-rinconada {
-  top: 44%;
-  left: 27%;
-  transform: translate(-50%, -50%) rotate(30deg);
+.map-foot a {
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
-.street-melipilla {
-  top: 58%;
-  left: 69%;
-  transform: translate(-50%, -50%) rotate(73deg);
-}
-
-.street-llona {
-  top: 79%;
-  left: 39%;
-  transform: translate(-50%, -50%) rotate(6deg);
-}
-
-.street-los-pinos {
-  top: 29%;
-  left: 40%;
-  transform: translate(-50%, -50%) rotate(83deg);
-}
-
-.zones-layer,
-.pins-layer {
-  position: absolute;
-  inset: 0;
-}
-
-.zones-layer {
-  z-index: 2;
-  pointer-events: none;
+.map-foot a:hover {
+  color: var(--green-deep);
 }
 
 .zone-label {
-  position: absolute;
   display: flex;
   min-height: 44px;
   max-width: 185px;
   align-items: center;
   gap: 6px;
   padding: 5px 7px;
-  border: 1px solid rgba(11, 34, 56, 0.13);
+  border: 1px solid rgba(11, 34, 56, 0.16);
   border-radius: 3px;
-  background: rgba(250, 248, 242, 0.93);
+  background: rgba(252, 251, 247, 0.96);
   color: var(--ink);
   text-align: left;
-  box-shadow: none;
+  box-shadow: 0 1px 3px rgba(11, 34, 56, 0.14);
   pointer-events: auto;
-  transform: translate(-50%, -50%);
-  transition: opacity var(--transition), border-color var(--transition), background-color var(--transition), transform var(--transition);
+  transition: opacity var(--transition), border-color var(--transition), background-color var(--transition), box-shadow var(--transition);
 }
 
 .zone-label:hover {
   border-color: var(--ink);
   background: var(--surface);
-  transform: translate(-50%, -50%) translateY(-1px);
+  box-shadow: 0 2px 6px rgba(11, 34, 56, 0.18);
 }
 
 .zone-label.is-selected {
   border-color: var(--ink);
   background: var(--surface);
-  box-shadow: inset 0 -2px 0 var(--ink);
+  box-shadow: inset 0 -2px 0 var(--ink), 0 2px 6px rgba(11, 34, 56, 0.16);
 }
 
 .zone-label.is-muted {
@@ -1146,14 +1076,8 @@ h3 {
   white-space: nowrap;
 }
 
-.pins-layer {
-  z-index: 3;
-  pointer-events: none;
-}
-
 .map-pin,
 .map-truck {
-  position: absolute;
   display: grid;
   width: 44px;
   height: 44px;
@@ -1162,8 +1086,6 @@ h3 {
   border: 0;
   background: transparent;
   pointer-events: auto;
-  transform: translate(-50%, -50%);
-  transition: opacity var(--transition), transform var(--transition);
 }
 
 .map-pin::before {
@@ -1175,6 +1097,7 @@ h3 {
   border-radius: 50%;
   background: var(--ink);
   box-shadow: 0 2px 5px rgba(12, 34, 56, 0.25);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .map-pin .icon {
@@ -1185,8 +1108,9 @@ h3 {
   color: #fff;
 }
 
-.map-pin:hover {
-  transform: translate(-50%, -50%) scale(1.06);
+.map-pin:hover::before {
+  transform: scale(1.07);
+  box-shadow: 0 3px 8px rgba(12, 34, 56, 0.28);
 }
 
 .map-pin.is-focused::before {
@@ -1203,6 +1127,7 @@ h3 {
   border-radius: 50%;
   background: var(--ink);
   box-shadow: 0 2px 5px rgba(12, 34, 56, 0.25);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .map-truck .icon {
@@ -1230,29 +1155,14 @@ h3 {
   background: #d3972d;
 }
 
-.map-truck:hover {
-  transform: translate(-50%, -50%) scale(1.06);
+.map-truck:hover::before {
+  transform: scale(1.07);
+  box-shadow: 0 3px 8px rgba(12, 34, 56, 0.28);
 }
 
 .map-truck.is-focused::before {
   border-color: var(--lime);
   box-shadow: 0 0 0 6px rgba(199, 217, 194, 0.32), 0 2px 5px rgba(12, 34, 56, 0.25);
-}
-
-.map-stage[data-map-mode="status"] .map-pin,
-.map-stage[data-map-mode="status"] .map-truck {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.map-pin.is-layer-off {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.map-pin.is-risk-off {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .map-zone-filter {
@@ -4490,16 +4400,13 @@ h3 {
     font-size: 0.56rem;
   }
 
-  .street-label {
-    font-size: 0.55rem;
+  .maipu-map .maplibregl-ctrl-bottom-right {
+    right: 9px;
+    bottom: 9px;
   }
 
-  .street-abril,
-  .street-rinconada,
-  .street-melipilla,
-  .street-llona,
-  .street-los-pinos {
-    display: none;
+  .map-loading {
+    font-size: 0.7rem;
   }
 
   .map-summary {
@@ -5160,6 +5067,18 @@ h3 {
 
   .view-link .icon {
     display: none;
+  }
+
+  .zone-label {
+    max-width: 118px;
+  }
+
+  .zone-copy small {
+    display: none;
+  }
+
+  .zone-copy strong {
+    font-size: 0.69rem;
   }
 }
 

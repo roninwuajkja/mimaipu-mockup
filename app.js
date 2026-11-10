@@ -53,57 +53,57 @@
   const zones = [
     {
       id: "rinconada",
-      shape: "rinconada",
       name: "Rinconada",
       risk: "red",
       detail: "Pasaje oscuro",
-      x: 24,
-      y: 29
+      lng: -70.8029,
+      lat: -33.5133,
+      radiusKm: 1.25
     },
     {
       id: "ciudad-satelite",
-      shape: "satelite",
       name: "Ciudad Satélite",
       risk: "yellow",
       detail: "Feria y accesos",
-      x: 57,
-      y: 19
+      lng: -70.7915,
+      lat: -33.554,
+      radiusKm: 1.55
     },
     {
       id: "pajaritos",
-      shape: "pajaritos",
       name: "Pajaritos",
       risk: "red",
       detail: "Riesgo de caída",
-      x: 41,
-      y: 46
+      lng: -70.7452,
+      lat: -33.4808,
+      radiusKm: 1.2
     },
     {
       id: "centro",
-      shape: "centro",
       name: "Centro",
       risk: "yellow",
       detail: "Atención moderada",
-      x: 29,
-      y: 65
+      lng: -70.7589,
+      lat: -33.5112,
+      radiusKm: 1.25
     },
     {
       id: "farfana",
-      shape: "farfana",
       name: "La Farfana",
       risk: "green",
       detail: "Mantención",
-      x: 22,
-      y: 80
+      lng: -70.7981,
+      lat: -33.4798,
+      radiusKm: 1.45
     },
     {
-      id: "malloco",
-      shape: "malloco",
-      name: "Malloco",
+      id: "villa-heroes",
+      name: "Villa Los Héroes",
       risk: "green",
       detail: "Ruta preventiva",
-      x: 75,
-      y: 69
+      lng: -70.7824,
+      lat: -33.5382,
+      radiusKm: 1.35
     }
   ];
 
@@ -121,8 +121,8 @@
       severityNote: "Pasaje sin luz",
       eta: "10:20",
       reports: "5 reportes",
-      x: 32,
-      y: 39,
+      lng: -70.8002,
+      lat: -33.512,
       assignedCrew: null
     },
     {
@@ -138,15 +138,15 @@
       severityNote: "Riesgo de caída",
       eta: "10:35",
       reports: "12 reportes",
-      x: 60,
-      y: 44,
+      lng: -70.7468,
+      lat: -33.4807,
       assignedCrew: null
     },
     {
       id: "M-2463",
       type: "aseo",
-      title: "Microbasural en Av. 5 de Abril con Portales",
-      address: "Av. 5 de Abril con Portales, Centro",
+      title: "Microbasural en Av. 5 de Abril",
+      address: "Av. 5 de Abril, Centro",
       zoneId: "centro",
       risk: "yellow",
       urgency: "Media",
@@ -155,8 +155,8 @@
       severityNote: "Acceso peatonal",
       eta: "11:10",
       reports: "8 reportes",
-      x: 43,
-      y: 60,
+      lng: -70.7623,
+      lat: -33.5109,
       assignedCrew: null
     },
     {
@@ -172,8 +172,8 @@
       severityNote: "Riesgo sanitario",
       eta: "11:40",
       reports: "4 reportes",
-      x: 67,
-      y: 27,
+      lng: -70.7905,
+      lat: -33.5525,
       assignedCrew: null
     },
     {
@@ -189,16 +189,16 @@
       severityNote: "Sin riesgo activo",
       eta: "15:30",
       reports: "Planificado",
-      x: 29,
-      y: 72,
+      lng: -70.796,
+      lat: -33.482,
       assignedCrew: null
     },
     {
       id: "M-2451",
       type: "bacheo",
       title: "Sellado preventivo en Camino a Melipilla",
-      address: "Camino a Melipilla, Malloco",
-      zoneId: "malloco",
+      address: "Camino a Melipilla, Villa Los Héroes",
+      zoneId: "villa-heroes",
       risk: "green",
       urgency: "Baja",
       urgencyNote: "Programado 16:10",
@@ -206,8 +206,8 @@
       severityNote: "Sin riesgo activo",
       eta: "16:10",
       reports: "Planificado",
-      x: 64,
-      y: 82,
+      lng: -70.7772,
+      lat: -33.5368,
       assignedCrew: null
     }
   ];
@@ -223,11 +223,11 @@
       cameraDetail: "3 baches detectados",
       vibration: "0.18 g",
       speed: "18 km/h",
-      location: "Av. Pajaritos, Rinconada",
+      location: "Camino a Rinconada, Rinconada",
       lastSync: "hace 4 s",
       pending: 0,
-      x: 43,
-      y: 31
+      lng: -70.8006,
+      lat: -33.5138
     },
     {
       id: "07",
@@ -242,8 +242,8 @@
       location: "Av. Los Pinos, Ciudad Satélite",
       lastSync: "hace 8 s",
       pending: 0,
-      x: 74,
-      y: 18
+      lng: -70.793,
+      lat: -33.5532
     },
     {
       id: "03",
@@ -258,24 +258,24 @@
       location: "Av. 5 de Abril, Centro",
       lastSync: "hace 3 s",
       pending: 0,
-      x: 26,
-      y: 53
+      lng: -70.7605,
+      lat: -33.5125
     },
     {
       id: "09",
       name: "Camión 09",
-      route: "Malloco · Ruta 6",
-      zoneId: "malloco",
+      route: "Villa Los Héroes · Ruta 6",
+      zoneId: "villa-heroes",
       online: false,
       camera: "En cola local",
       cameraDetail: "2 detecciones guardadas",
       vibration: "0.16 g",
       speed: "0 km/h",
-      location: "Camino a Melipilla, Malloco",
+      location: "Camino a Melipilla, Villa Los Héroes",
       lastSync: "hace 24 min",
       pending: 14,
-      x: 79,
-      y: 63
+      lng: -70.774,
+      lat: -33.5374
     }
   ];
 
@@ -289,6 +289,56 @@
     selectedTickets: new Set(),
     activeFleetId: null,
     isDispatching: false
+  };
+
+  const OSM_MAP_STYLE = {
+    version: 8,
+    sources: {
+      osm: {
+        type: "raster",
+        tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        maxzoom: 19,
+        attribution: '© OpenStreetMap contributors'
+      }
+    },
+    layers: [
+      {
+        id: "osm",
+        type: "raster",
+        source: "osm",
+        paint: {
+          "raster-saturation": -0.84,
+          "raster-contrast": -0.06,
+          "raster-brightness-max": 0.98
+        }
+      },
+      {
+        id: "paper-wash",
+        type: "background",
+        paint: {
+          "background-color": "#f1ede3",
+          "background-opacity": 0.14
+        }
+      }
+    ]
+  };
+
+  const zoneMapColors = {
+    red: "#a84639",
+    yellow: "#b88327",
+    green: "#2e7659"
+  };
+
+  const mapRegistry = {
+    map: null,
+    ready: false,
+    loadingTimer: null,
+    resizeObserver: null,
+    zoneMarkers: new Map(),
+    pinMarkers: new Map(),
+    truckMarkers: new Map(),
+    zoneFeatureIds: new Map()
   };
 
   let toastTimer = null;
@@ -379,6 +429,13 @@
         ? "Canal ciudadano · MiMaipú"
         : "Despacho municipal · MiMaipú";
 
+    if (validView === "dashboard") {
+      window.requestAnimationFrame(() => {
+        ensureMap();
+        mapRegistry.map?.resize();
+      });
+    }
+
     if (options.focus) {
       const heading = validView === "citizen" ? $("#citizen-title") : $("#dashboard-title");
       window.scrollTo({ top: 0, behavior: "auto" });
@@ -433,50 +490,367 @@
     updateMapState();
   }
 
-  function renderZones() {
-    const container = $("#zones-layer");
-    if (!container) return;
-    container.innerHTML = zones
-      .map((zone) => {
-        const meta = riskMeta[zone.risk];
-        const count = zoneTicketCount(zone.id);
-        const countLabel = count === 1 ? "1 caso" : `${count} casos`;
-        return `
-          <button class="zone-label" type="button" data-zone-id="${zone.id}" style="left:${zone.x}%;top:${zone.y}%" aria-pressed="false">
-            <span class="zone-glyph ${meta.glyph}">${icon(meta.icon)}</span>
-            <span class="zone-copy">
-              <strong>${escapeHTML(zone.name)}</strong>
-              <small>${meta.short} · ${countLabel}</small>
-            </span>
-          </button>`;
-      })
-      .join("");
+  function circleCoordinates(lng, lat, radiusKm, steps = 56) {
+    const earthRadiusKm = 6371;
+    const latitude = (lat * Math.PI) / 180;
+    const angularDistance = radiusKm / earthRadiusKm;
+    const coordinates = [];
+    for (let step = 0; step < steps; step += 1) {
+      const bearing = (step / steps) * Math.PI * 2;
+      const pointLatitude = Math.asin(
+        Math.sin(latitude) * Math.cos(angularDistance) +
+          Math.cos(latitude) * Math.sin(angularDistance) * Math.cos(bearing)
+      );
+      const pointLongitude =
+        (lng * Math.PI) / 180 +
+        Math.atan2(
+          Math.sin(bearing) * Math.sin(angularDistance) * Math.cos(latitude),
+          Math.cos(angularDistance) - Math.sin(latitude) * Math.sin(pointLatitude)
+        );
+      coordinates.push([
+        (pointLongitude * 180) / Math.PI,
+        (pointLatitude * 180) / Math.PI
+      ]);
+    }
+    coordinates.push(coordinates[0]);
+    return coordinates;
   }
 
-  function renderPins() {
-    const container = $("#pins-layer");
+  function buildZoneGeoJSON() {
+    mapRegistry.zoneFeatureIds.clear();
+    const features = zones.map((zone, index) => {
+      const featureId = index + 1;
+      mapRegistry.zoneFeatureIds.set(zone.id, featureId);
+      return {
+        type: "Feature",
+        id: featureId,
+        properties: {
+          zoneId: zone.id,
+          risk: zone.risk,
+          name: zone.name
+        },
+        geometry: {
+          type: "Polygon",
+          coordinates: [circleCoordinates(zone.lng, zone.lat, zone.radiusKm)]
+        }
+      };
+    });
+    return { type: "FeatureCollection", features };
+  }
+
+  function setMapLoading(loading) {
+    const loadingElement = $("#map-loading");
+    if (loadingElement) loadingElement.hidden = !loading;
+    const fallback = $("#map-fallback");
+    if (loading && fallback) fallback.hidden = true;
+    $("#map-stage")?.setAttribute("aria-busy", String(loading));
+  }
+
+  function showMapFailure() {
+    if (mapRegistry.loadingTimer) {
+      window.clearTimeout(mapRegistry.loadingTimer);
+      mapRegistry.loadingTimer = null;
+    }
+    mapRegistry.ready = false;
+    setMapLoading(false);
+    const fallback = $("#map-fallback");
+    if (fallback) fallback.hidden = false;
+  }
+
+  function labelMapControls() {
+    const container = $("#maipu-map");
     if (!container) return;
-    const ticketMarkup = tickets
-      .map((ticket) => {
-        const type = typeMeta[ticket.type];
-        return `
-          <button class="map-pin" type="button" data-ticket-id="${ticket.id}" style="left:${ticket.x}%;top:${ticket.y}%" aria-label="${escapeHTML(type.name)}, ${escapeHTML(ticket.title)}. ${riskMeta[ticket.risk].label}" title="${escapeHTML(ticket.id)} · ${escapeHTML(ticket.title)}">
-            ${icon(type.icon)}
-          </button>`;
-      })
-      .join("");
+    const controlLabels = [
+      [".maplibregl-ctrl-zoom-in", "Acercar mapa"],
+      [".maplibregl-ctrl-zoom-out", "Alejar mapa"]
+    ];
+    controlLabels.forEach(([selector, label]) => {
+      const control = container.querySelector(selector);
+      if (!control) return;
+      control.setAttribute("aria-label", label);
+      control.setAttribute("title", label);
+    });
+  }
 
-    const truckMarkup = fleet
-      .map((truck) => {
-        const zone = getZone(truck.zoneId);
-        return `
-          <button class="map-truck${truck.online ? "" : " is-offline"}" type="button" data-truck-id="${truck.id}" style="left:${truck.x}%;top:${truck.y}%" aria-label="${escapeHTML(truck.name)}, ${truck.online ? "en línea" : "modo offline"}. ${escapeHTML(zone?.name || "")}">
-            ${icon("i-truck")}
-          </button>`;
-      })
-      .join("");
+  function addMapLayers(map) {
+    map.addSource("dispatch-zones", {
+      type: "geojson",
+      data: buildZoneGeoJSON()
+    });
 
-    container.innerHTML = ticketMarkup + truckMarkup;
+    map.addLayer({
+      id: "dispatch-zone-fill",
+      type: "fill",
+      source: "dispatch-zones",
+      paint: {
+        "fill-color": [
+          "match",
+          ["get", "risk"],
+          "red",
+          zoneMapColors.red,
+          "yellow",
+          zoneMapColors.yellow,
+          "green",
+          zoneMapColors.green,
+          "#65736b"
+        ],
+        "fill-opacity": [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          0.24,
+          ["boolean", ["feature-state", "dimmed"], false],
+          0.035,
+          ["boolean", ["feature-state", "quiet"], false],
+          0.05,
+          0.15
+        ]
+      }
+    });
+
+    map.addLayer({
+      id: "dispatch-zone-line",
+      type: "line",
+      source: "dispatch-zones",
+      paint: {
+        "line-color": [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          "#0b2238",
+          ["match", ["get", "risk"], "red", zoneMapColors.red, "yellow", zoneMapColors.yellow, "green", zoneMapColors.green, "#65736b"]
+        ],
+        "line-width": [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          2.4,
+          ["boolean", ["feature-state", "dimmed"], false],
+          0.6,
+          ["boolean", ["feature-state", "quiet"], false],
+          0.7,
+          1.15
+        ],
+        "line-opacity": [
+          "case",
+          ["boolean", ["feature-state", "selected"], false],
+          0.95,
+          ["boolean", ["feature-state", "dimmed"], false],
+          0.2,
+          ["boolean", ["feature-state", "quiet"], false],
+          0.3,
+          0.66
+        ]
+      }
+    });
+
+    map.on("click", "dispatch-zone-fill", (event) => {
+      if (appState.mapMode !== "status") return;
+      const zoneId = event.features?.[0]?.properties?.zoneId;
+      if (zoneId) selectZone(zoneId);
+    });
+
+    map.on("mousemove", "dispatch-zone-fill", () => {
+      if (appState.mapMode === "status") map.getCanvas().style.cursor = "pointer";
+    });
+
+    map.on("mouseleave", "dispatch-zone-fill", () => {
+      map.getCanvas().style.cursor = "";
+    });
+  }
+
+  function createZoneMarkers(map) {
+    zones.forEach((zone) => {
+      const meta = riskMeta[zone.risk];
+      const count = zoneTicketCount(zone.id);
+      const countLabel = count === 1 ? "1 caso" : `${count} casos`;
+      const button = document.createElement("button");
+      button.className = "zone-label";
+      button.type = "button";
+      button.dataset.zoneId = zone.id;
+      button.setAttribute("aria-pressed", "false");
+      button.setAttribute("aria-label", `${zone.name} ${meta.short} · ${countLabel}`);
+      button.innerHTML = `
+        <span class="zone-glyph ${meta.glyph}">${icon(meta.icon)}</span>
+        <span class="zone-copy">
+          <strong>${escapeHTML(zone.name)}</strong>
+          <small>${meta.short} · ${countLabel}</small>
+        </span>`;
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        selectZone(zone.id);
+      });
+      const marker = new window.maplibregl.Marker({ element: button, anchor: "center" })
+        .setLngLat([zone.lng, zone.lat])
+        .addTo(map);
+      mapRegistry.zoneMarkers.set(zone.id, { button, marker });
+    });
+  }
+
+  function createPinMarkers(map) {
+    tickets.forEach((ticket) => {
+      const type = typeMeta[ticket.type];
+      const button = document.createElement("button");
+      button.className = "map-pin";
+      button.type = "button";
+      button.dataset.ticketId = ticket.id;
+      button.setAttribute(
+        "aria-label",
+        `${type.name}, ${ticket.title}. ${riskMeta[ticket.risk].label}`
+      );
+      button.title = `${ticket.id} · ${ticket.title}`;
+      button.innerHTML = icon(type.icon);
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openTicketPopover(ticket);
+      });
+      const marker = new window.maplibregl.Marker({ element: button, anchor: "center" })
+        .setLngLat([ticket.lng, ticket.lat])
+        .addTo(map);
+      mapRegistry.pinMarkers.set(ticket.id, { button, marker });
+    });
+  }
+
+  function createTruckMarkers(map) {
+    fleet.forEach((truck) => {
+      const zone = getZone(truck.zoneId);
+      const button = document.createElement("button");
+      button.className = `map-truck${truck.online ? "" : " is-offline"}`;
+      button.type = "button";
+      button.dataset.truckId = truck.id;
+      button.setAttribute(
+        "aria-label",
+        `${truck.name}, ${truck.online ? "en línea" : "modo offline"}. ${zone?.name || ""}`
+      );
+      button.innerHTML = icon("i-truck");
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        openFleetDialog(truck.id);
+      });
+      const marker = new window.maplibregl.Marker({ element: button, anchor: "center" })
+        .setLngLat([truck.lng, truck.lat])
+        .addTo(map);
+      mapRegistry.truckMarkers.set(truck.id, { button, marker });
+    });
+  }
+
+  function updateMapLayers() {
+    const map = mapRegistry.map;
+    if (!map || !mapRegistry.ready || !map.getSource("dispatch-zones")) return;
+    const isIncidentView = appState.mapMode === "incidents";
+    zones.forEach((zone) => {
+      const featureId = mapRegistry.zoneFeatureIds.get(zone.id);
+      if (!featureId) return;
+      map.setFeatureState(
+        { source: "dispatch-zones", id: featureId },
+        {
+          selected: appState.selectedZone === zone.id,
+          dimmed:
+            appState.activeRisk !== "all" && zone.risk !== appState.activeRisk,
+          quiet: isIncidentView
+        }
+      );
+    });
+  }
+
+  function updateMapMarkerVisibility() {
+    const isStatusView = appState.mapMode === "status";
+    mapRegistry.zoneMarkers.forEach(({ button }) => {
+      button.style.display = isStatusView ? "" : "none";
+    });
+
+    mapRegistry.pinMarkers.forEach(({ button }, ticketId) => {
+      const ticket = getTicket(ticketId);
+      if (!ticket) return;
+      const visible =
+        !isStatusView &&
+        appState.activeLayers.has(ticket.type) &&
+        (appState.activeRisk === "all" || ticket.risk === appState.activeRisk) &&
+        (!appState.selectedZone || ticket.zoneId === appState.selectedZone);
+      button.style.display = visible ? "" : "none";
+    });
+
+    mapRegistry.truckMarkers.forEach(({ button }) => {
+      button.style.display = isStatusView ? "none" : "";
+    });
+  }
+
+  function fitMapToZones(map) {
+    const bounds = new window.maplibregl.LngLatBounds();
+    zones.forEach((zone) => bounds.extend([zone.lng, zone.lat]));
+    if (bounds.isEmpty()) return;
+    map.fitBounds(bounds, {
+      padding: { top: 72, right: 76, bottom: 54, left: 54 },
+      maxZoom: 12.8,
+      duration: 0
+    });
+  }
+
+  function clearMapMarkers() {
+    ["zoneMarkers", "pinMarkers", "truckMarkers"].forEach((group) => {
+      mapRegistry[group].forEach(({ marker }) => marker.remove());
+      mapRegistry[group].clear();
+    });
+  }
+
+  function ensureMap() {
+    if (appState.view !== "dashboard" || mapRegistry.map) return;
+    const container = $("#maipu-map");
+    if (!container) return;
+    if (!window.maplibregl) {
+      showMapFailure();
+      return;
+    }
+
+    setMapLoading(true);
+    try {
+      const map = new window.maplibregl.Map({
+        container,
+        style: OSM_MAP_STYLE,
+        center: [-70.773, -33.518],
+        zoom: 11.7,
+        minZoom: 10.5,
+        maxZoom: 16.5,
+        maxBounds: [
+          [-70.96, -33.68],
+          [-70.66, -33.42]
+        ],
+        dragRotate: false,
+        pitchWithRotate: false,
+        scrollZoom: false,
+        attributionControl: false
+      });
+      mapRegistry.map = map;
+      map.addControl(new window.maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
+      map.touchZoomRotate.disableRotation();
+      window.requestAnimationFrame(labelMapControls);
+      if ("ResizeObserver" in window) {
+        mapRegistry.resizeObserver?.disconnect();
+        mapRegistry.resizeObserver = new ResizeObserver(() => map.resize());
+        mapRegistry.resizeObserver.observe(container);
+      }
+
+      mapRegistry.loadingTimer = window.setTimeout(() => {
+        if (!mapRegistry.ready) showMapFailure();
+      }, 12000);
+
+      map.once("load", () => {
+        if (mapRegistry.loadingTimer) {
+          window.clearTimeout(mapRegistry.loadingTimer);
+          mapRegistry.loadingTimer = null;
+        }
+        mapRegistry.ready = true;
+        map.resize();
+        addMapLayers(map);
+        createZoneMarkers(map);
+        createPinMarkers(map);
+        createTruckMarkers(map);
+        fitMapToZones(map);
+        updateMapLayers();
+        updateMapState();
+        setMapLoading(false);
+      });
+    } catch (error) {
+      mapRegistry.map = null;
+      showMapFailure();
+    }
   }
 
   function updateMapState() {
@@ -491,13 +865,6 @@
       button.disabled = !riskMatches;
       button.classList.toggle("is-selected", zoneSelection === zone.id);
       button.setAttribute("aria-pressed", String(zoneSelection === zone.id));
-    });
-
-    $$("[data-zone-shape]").forEach((shape) => {
-      const zone = zones.find((item) => item.shape === shape.dataset.zoneShape);
-      if (!zone) return;
-      shape.classList.toggle("is-filtered", riskFilter !== "all" && zone.risk !== riskFilter);
-      shape.classList.toggle("is-selected", zoneSelection === zone.id);
     });
 
     $$("[data-risk]").forEach((button) => {
@@ -516,23 +883,6 @@
       resetRisk.setAttribute("aria-pressed", String(riskFilter === "all"));
       resetRisk.disabled = riskFilter === "all";
     }
-
-    $$(".map-pin").forEach((pin) => {
-      const ticket = getTicket(pin.dataset.ticketId);
-      if (!ticket) return;
-      const layerOff = !appState.activeLayers.has(ticket.type);
-      const riskOff = riskFilter !== "all" && ticket.risk !== riskFilter;
-      const zoneOff = Boolean(zoneSelection) && ticket.zoneId !== zoneSelection;
-      pin.classList.toggle("is-layer-off", layerOff);
-      pin.classList.toggle("is-risk-off", riskOff);
-      pin.classList.toggle("is-zone-off", zoneOff);
-      pin.hidden = layerOff || riskOff || zoneOff;
-    });
-
-    $$(".map-truck").forEach((marker) => {
-      marker.hidden = false;
-      marker.classList.remove("is-zone-off");
-    });
 
     const zoneFilterChip = $("#map-zone-filter");
     if (zoneFilterChip) {
@@ -564,6 +914,9 @@
         <span class="map-summary-dot" aria-hidden="true"></span>
         <span><strong>${cases} ${cases === 1 ? "caso visible" : "casos visibles"}</strong> · ${appState.mapMode === "status" ? "vista semáforo" : "vista incidentes"}</span>`;
     }
+
+    updateMapMarkerVisibility();
+    updateMapLayers();
   }
 
   let popoverReturnFocus = null;
@@ -691,8 +1044,6 @@
   }
 
   function setupMap() {
-    renderZones();
-    renderPins();
     updateMapState();
 
     $$(".segment[data-map-mode]").forEach((button) => {
@@ -739,21 +1090,21 @@
       updateBulkBar();
     });
 
-    $("#zones-layer")?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-zone-id]");
-      if (!button) return;
-      selectZone(button.dataset.zoneId);
+    $("#map-retry")?.addEventListener("click", () => {
+      clearMapMarkers();
+      mapRegistry.resizeObserver?.disconnect();
+      mapRegistry.resizeObserver = null;
+      mapRegistry.map?.remove();
+      mapRegistry.map = null;
+      mapRegistry.ready = false;
+      const fallback = $("#map-fallback");
+      if (fallback) fallback.hidden = true;
+      setMapLoading(true);
+      ensureMap();
     });
 
-    $("#pins-layer")?.addEventListener("click", (event) => {
-      const pin = event.target.closest("[data-ticket-id]");
-      if (pin) {
-        const ticket = getTicket(pin.dataset.ticketId);
-        if (ticket) openTicketPopover(ticket);
-        return;
-      }
-      const truckButton = event.target.closest("[data-truck-id]");
-      if (truckButton) openFleetDialog(truckButton.dataset.truckId);
+    window.addEventListener("resize", () => {
+      window.requestAnimationFrame(() => mapRegistry.map?.resize());
     });
 
     $("#map-zone-filter")?.addEventListener("click", () => {
@@ -1123,6 +1474,13 @@
       setMapMode("incidents");
       const marker = $(`.map-truck[data-truck-id="${truck.id}"]`);
       $("#map-stage")?.scrollIntoView({ behavior: reducedMotion.matches ? "auto" : "smooth", block: "center" });
+      if (mapRegistry.map && mapRegistry.ready) {
+        mapRegistry.map.flyTo({
+          center: [truck.lng, truck.lat],
+          zoom: Math.max(mapRegistry.map.getZoom(), 13.2),
+          duration: reducedMotion.matches ? 0 : 650
+        });
+      }
       marker?.classList.add("is-focused");
       window.setTimeout(() => marker?.classList.remove("is-focused"), 2400);
       showToast(`${truck.name} ubicado en ${truck.location}.`);

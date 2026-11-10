@@ -9,7 +9,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/public-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/vendor/maplibre/maplibre-gl.css">
   <link rel="stylesheet" href="styles.css">
+  <script src="assets/vendor/maplibre/maplibre-gl.js" defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -269,7 +271,7 @@
             <div class="panel-head map-head">
               <div>
                 <h2 id="map-title">Mapa operativo</h2>
-                <p class="panel-meta">Maipú · 6 macrozonas. Selecciona una zona o un caso.</p>
+                <p class="panel-meta">Maipú · base OpenStreetMap · 6 macrozonas operativas.</p>
               </div>
             </div>
 
@@ -296,81 +298,19 @@
             </div>
 
             <div class="map-stage" id="map-stage" data-map-mode="status">
-              <svg class="map-art" viewBox="0 0 920 520" preserveAspectRatio="none" role="img" aria-label="Mapa esquemático de Maipú con macrozonas, calles principales y equipos en terreno">
-                <defs>
-                  <clipPath id="commune-clip">
-                    <path d="M94 132 282 56 548 48 774 112 849 250 794 386 624 462 382 480 188 416 92 292Z"></path>
-                  </clipPath>
-                  <filter id="map-soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#607068" flood-opacity=".14"></feDropShadow>
-                  </filter>
-                </defs>
-
-                <rect width="920" height="520" fill="#e7e2d7"></rect>
-                <path d="M0 0h920v520H0z" fill="#ece8de"></path>
-
-                <g clip-path="url(#commune-clip)">
-                  <path class="zone-fill zone-fill-rinconada" data-zone-shape="rinconada" d="M92 132 282 56 356 144 304 262 172 296 92 292Z"></path>
-                  <path class="zone-fill zone-fill-satelite" data-zone-shape="ciudad-satelite" d="M282 56 548 48 774 112 764 226 536 250 356 144Z"></path>
-                  <path class="zone-fill zone-fill-pajaritos" data-zone-shape="pajaritos" d="M304 262 536 250 764 226 780 318 610 346 330 326 172 296Z"></path>
-                  <path class="zone-fill zone-fill-centro" data-zone-shape="centro" d="M172 296 330 326 610 346 566 404 382 480 188 416 92 292Z"></path>
-                  <path class="zone-fill zone-fill-farfana" data-zone-shape="farfana" d="M188 416 382 480 370 494 160 442 92 336 100 302 188 416Z"></path>
-                  <path class="zone-fill zone-fill-malloco" data-zone-shape="malloco" d="M610 346 780 318 794 386 624 462 566 404Z"></path>
-
-                  <g class="map-parks">
-                    <path d="M614 164c26-22 71-15 84 13s-11 55-44 55-63-41-40-68Z"></path>
-                    <path d="M379 372c12-19 43-16 54 2 10 19-3 42-28 42-23 0-38-25-26-44Z"></path>
-                    <path d="M232 196c15-14 41-7 44 11 4 19-15 34-33 29-17-5-23-29-11-40Z"></path>
-                  </g>
-
-                  <g class="map-water">
-                    <path d="M94 180C208 150 300 173 398 166s180-59 289-44c51 7 100 23 158 9"></path>
-                  </g>
-
-                  <g class="map-minor-streets">
-                    <path d="M150 92c70 44 100 76 124 138"></path>
-                    <path d="M238 102c36 55 46 105 38 168"></path>
-                    <path d="M428 88c-2 44 2 83 22 122"></path>
-                    <path d="M594 94c-22 55-20 102-6 148"></path>
-                    <path d="M704 118c-48 45-70 92-78 144"></path>
-                    <path d="M154 232c77 16 154 25 231 31 96 8 196 5 306-12"></path>
-                    <path d="M232 350c94-7 184 3 278 22 58 12 112 24 188 23"></path>
-                    <path d="M318 112c18 40 20 88 32 144 13 66 31 131 42 215"></path>
-                    <path d="M488 92c-7 44 5 91 10 138 7 64-10 141 17 232"></path>
-                    <path d="M648 109c-5 48 5 91 15 139 10 53 13 105 9 166"></path>
-                    <path d="M132 280c79 35 129 71 186 120"></path>
-                    <path d="M680 275c-49 32-70 86-81 139"></path>
-                  </g>
-
-                  <g class="map-major-streets">
-                    <path d="M63 202c129 18 239 16 382 22 129 5 253 22 421-4"></path>
-                    <path d="M369 48c-15 92-10 195 14 290 19 77 25 133 36 196"></path>
-                    <path d="M167 322c85 17 169 23 267 23 137 0 219-4 328-20"></path>
-                    <path d="M696 122c-50 65-77 139-100 237-11 46-25 105-42 162"></path>
-                    <path d="M174 68c45 81 91 142 144 193 62 59 147 104 260 170"></path>
-                    <path d="M129 394c95 23 175 29 280 31 133 2 235-18 347-17"></path>
-                  </g>
-
-                  <path class="map-boundary" d="M94 132 282 56 548 48 774 112 849 250 794 386 624 462 382 480 188 416 92 292Z"></path>
-                </g>
-
-              </svg>
-
-              <div class="street-labels" aria-hidden="true">
-                <span class="street-label street-pajaritos">Av. Pajaritos</span>
-                <span class="street-label street-abril">Av. 5 de Abril</span>
-                <span class="street-label street-rinconada">Camino a Rinconada</span>
-                <span class="street-label street-melipilla">Camino a Melipilla</span>
-                <span class="street-label street-llona">Av. Alberto Llona</span>
-                <span class="street-label street-los-pinos">Av. Los Pinos</span>
+              <div class="maipu-map" id="maipu-map" role="region" aria-label="Mapa interactivo de Maipú con macrozonas operativas, casos y flota sensorizada"></div>
+              <div class="map-loading" id="map-loading" role="status">
+                <span class="spinner" aria-hidden="true"></span>
+                <span>Cargando mapa de Maipú...</span>
               </div>
-
-              <div class="zones-layer" id="zones-layer"></div>
-              <div class="pins-layer" id="pins-layer"></div>
+              <div class="map-fallback" id="map-fallback" role="alert" hidden>
+                <strong>No se pudo cargar el mapa interactivo.</strong>
+                <p>Revisa tu conexión e inténtalo nuevamente.</p>
+                <button class="button button-secondary button-small" type="button" id="map-retry">Reintentar mapa</button>
+              </div>
               <button class="map-zone-filter" id="map-zone-filter" type="button" hidden></button>
               <div class="map-popover" id="map-popover" hidden></div>
-
-              <div class="map-summary">
+              <div class="map-summary" aria-live="polite">
                 <span class="map-summary-dot" aria-hidden="true"></span>
                 <span><strong>6 casos activos</strong> en 6 macrozonas</span>
               </div>
@@ -400,7 +340,7 @@
               </div>
             </div>
             <div class="map-foot">
-              <p>Mapa esquemático. El semáforo combina reportes, historial y luminosidad de cada sector. Datos simulados.</p>
+              <p>Mapa base © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a>. Macrozonas, riesgos y datos simulados.</p>
               <span>Corte <time id="map-cut">09:42</time></span>
             </div>
           </section>
